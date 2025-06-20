@@ -19,7 +19,6 @@
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@constants/*": ["constants/*"],
-      "@layouts/*": ["components/layouts/*"],
       "@services/*": ["services/*"],
       "@hooks/*": ["hooks/*"],
       "@types/*": ["types/*"]
