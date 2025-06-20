@@ -3,9 +3,11 @@ import AuthenticatedAppBar from "./AuthenticatedAppBar";
 import UnauthenticatedAppBar from "./UnauthenticatedAppBar";
 import { useNavigate } from "react-router-dom";
 import { PUBLIC_ROUTES } from "@constants/routes";
+import { useAuth } from "@hooks/useAuth";
 
 const AppBarComponent = () => {
-  const token = localStorage.getItem("token");
+  const { user } = useAuth();
+
   const navigate = useNavigate();
   return (
     <AppBar position="static">
@@ -17,7 +19,7 @@ const AppBarComponent = () => {
         >
           PlantMarket
         </Button>
-        {token ? <AuthenticatedAppBar /> : <UnauthenticatedAppBar />}
+        {user?.token ? <AuthenticatedAppBar /> : <UnauthenticatedAppBar />}
       </Toolbar>
     </AppBar>
   );
