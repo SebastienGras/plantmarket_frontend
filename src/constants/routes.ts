@@ -15,3 +15,8 @@ export const AUTHENTICATED_ROUTES = {
   USER_PRODUCTS: "/products/user/:userId",
   LOGOUT: "/logout",
 };
+
+export const ALL_ROUTES = {
+  ...PUBLIC_ROUTES,
+  ...AUTHENTICATED_ROUTES,
+};
