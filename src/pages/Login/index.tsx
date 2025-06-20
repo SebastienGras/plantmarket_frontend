@@ -7,15 +7,16 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
+import { useLoginUser } from "./hooks";
 
 const Login: React.FC = () => {
+  const { mutate: loginUser, isPending, error, data } = useLoginUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    alert(`Email: ${email}\nPassword: ${password}`);
+    loginUser({ email, password });
   };
 
   return (
@@ -50,6 +51,18 @@ const Login: React.FC = () => {
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Login
           </Button>
+          {isPending && <Typography>Loading...</Typography>}
+          {error && (
+            <Typography color="error">
+              Error:{" "}
+              {error instanceof Error ? error.message : "An error occurred"}
+            </Typography>
+          )}
+          {data && (
+            <Typography color="success.main">
+              Login successful! Welcome, {data.token}!
+            </Typography>
+          )}
         </Box>
       </Paper>
     </Container>
