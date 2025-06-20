@@ -16,4 +16,8 @@ export const useLoginUser = () =>
       });
       return response.data;
     },
+    onSuccess: (data) => {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data));
+    },
   });
