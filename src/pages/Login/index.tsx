@@ -10,7 +10,7 @@ import {
 import { useLoginUser } from "./hooks";
 
 const Login: React.FC = () => {
-  const { mutate: loginUser, isPending, error, data } = useLoginUser(); // Assuming useLoginUser is defined in hooks.tsx
+  const { mutate: loginUser, isPending, error, data } = useLoginUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

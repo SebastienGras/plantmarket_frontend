@@ -8,9 +8,9 @@ export type LoginUserParams = {
 };
 export const useLoginUser = () =>
   useMutation({
-    mutationKey: [QUERY_KEYS.LOGIN],
+    mutationKey: [QUERY_KEYS.AUTH_LOGIN],
     mutationFn: async ({ email, password }: LoginUserParams) => {
-      const response = await api.post("/auth/login", {
+      const response = await api.post(QUERY_KEYS.AUTH_LOGIN, {
         email,
         password,
       });

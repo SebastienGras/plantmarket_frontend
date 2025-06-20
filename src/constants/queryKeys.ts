@@ -1,3 +1,3 @@
 export const QUERY_KEYS = {
-  LOGIN: "login",
+  AUTH_LOGIN: "/auth/login",
 };
