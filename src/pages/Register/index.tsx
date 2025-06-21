@@ -1,6 +1,5 @@
 import { Form, Field } from "react-final-form";
 import {
-  Button,
   Container,
   TextField,
   Typography,
@@ -9,6 +8,7 @@ import {
   Box,
 } from "@mui/material";
 import { useRegister } from "./hooks/useRegister";
+import ButtonComponent from "@components/Button/intex";
 
 const Register = () => {
   const { mutate: registerMutation, isPending, error } = useRegister();
@@ -80,15 +80,11 @@ const Register = () => {
                   </Alert>
                 )}
 
-                <Button
+                <ButtonComponent
+                  text={isPending ? "Création..." : "S'inscrire"}
                   type="submit"
-                  variant="contained"
-                  fullWidth
-                  sx={{ mt: 3, backgroundColor: "#66bb6a" }}
                   disabled={isPending}
-                >
-                  {isPending ? "Création..." : "S'inscrire"}
-                </Button>
+                />
               </form>
             )}
           />
