@@ -1,68 +1,113 @@
-import storybook from "eslint-plugin-storybook";
+// eslint.config.js
 import js from "@eslint/js";
-import globals from "globals";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
+import importPlugin from "eslint-plugin-import";
+import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
-import importPlugin from "eslint-plugin-import";
-import simpleImportSort from "eslint-plugin-simple-import-sort";
+import storybook from "eslint-plugin-storybook";
+import globals from "globals";
 
-export default tseslint.config(
-  { ignores: ["dist"] },
+export default [
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module",
+        ecmaFeatures: { jsx: true },
+      },
       globals: globals.browser,
-      sourceType: "module",
     },
     plugins: {
+      react,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      "@typescript-eslint": tsPlugin,
+      storybook,
       import: importPlugin,
-      "simple-import-sort": simpleImportSort,
     },
     rules: {
+      ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },
       ],
-      // Tri automatique des imports
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
-      // Interdit les imports relatifs vers les parents
-      "import/no-relative-parent-imports": "error",
-      // Optionnel : détecte les imports non résolus (doit marcher avec l'alias tsconfig)
-      "import/no-unresolved": "error",
-      // Encourage le typage explicite des fonctions
-      "@typescript-eslint/explicit-function-return-type": [
+
+      "@typescript-eslint/explicit-function-return-type": ["warn"],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
+      "@typescript-eslint/no-explicit-any": "off",
+
+      "import/order": [
         "warn",
         {
-          allowExpressions: true,
-          allowTypedFunctionExpressions: true,
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+          ],
+          "newlines-between": "always",
+          alphabetize: { order: "asc", caseInsensitive: true },
         },
       ],
 
-      // Autorise de typer les variables, au lieu de les interdire
-      "@typescript-eslint/no-inferrable-types": [
-        "warn",
-        {
-          ignoreParameters: true, // autorise function foo(bar: string)
-          ignoreProperties: true, // autorise const obj: { foo: number }
-        },
-      ],
-
-      // Si tu veux forcer tous les arguments à être typés
-      "@typescript-eslint/explicit-module-boundary-types": "warn",
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off",
     },
     settings: {
-      "import/resolver": {
-        typescript: {
-          project: "./tsconfig.json",
-        },
-      },
+      react: { version: "detect" },
+      "import/resolver": { typescript: {} },
     },
   },
-  storybook.configs["flat/recommended"]
-);
+  {
+    files: ["**/*.js", "**/*.jsx"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: "module",
+      globals: globals.browser,
+    },
+    plugins: {
+      react,
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
+      storybook,
+      import: importPlugin,
+    },
+    rules: {
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+          ],
+          "newlines-between": "always",
+          alphabetize: { order: "asc", caseInsensitive: true },
+        },
+      ],
+    },
+    settings: {
+      react: { version: "detect" },
+      "import/resolver": { node: {} },
+    },
+  },
+];

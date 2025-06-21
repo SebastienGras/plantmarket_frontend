@@ -1,4 +1,3 @@
-import { Form, Field } from "react-final-form";
 import {
   Container,
   TextField,
@@ -7,17 +6,20 @@ import {
   Alert,
   Box,
 } from "@mui/material";
+import { JSX } from "react";
+import { Form, Field } from "react-final-form";
+
 import { useRegister } from "./hooks/useRegister";
 import ButtonComponent from "@components/Button";
 
-const Register = () => {
+const Register = (): JSX.Element => {
   const { mutate: registerMutation, isPending, error } = useRegister();
 
   const onSubmit = (values: {
     email: string;
     password: string;
     confirmPassword: string;
-  }) => {
+  }): void => {
     registerMutation(values);
   };
 

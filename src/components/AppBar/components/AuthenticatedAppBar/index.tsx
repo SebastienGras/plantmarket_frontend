@@ -1,12 +1,13 @@
 import ButtonComponent from "@components/Button";
 import { useAuth } from "@hooks/useAuth";
+import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AuthenticatedAppBar = () => {
+const AuthenticatedAppBar = (): JSX.Element => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
-  const handleSignoutClick = () => {
+  const handleSignoutClick = (): void => {
     localStorage.removeItem("user");
     setUser(null);
     navigate("/");

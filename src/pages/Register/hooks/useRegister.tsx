@@ -1,6 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
-import { api } from "@services/axios";
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+
+import { api } from "@services/axios";
 
 type RegisterValues = {
   email: string;
@@ -8,7 +9,12 @@ type RegisterValues = {
   confirmPassword: string;
 };
 
-export const useRegister = () => {
+export const useRegister = (): UseMutationResult<
+  any,
+  Error,
+  RegisterValues,
+  unknown
+> => {
   const navigate = useNavigate();
 
   return useMutation({

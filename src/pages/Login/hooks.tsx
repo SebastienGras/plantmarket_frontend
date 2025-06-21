@@ -1,14 +1,20 @@
-import { QUERY_KEYS } from "@constants/queryKeys";
-import { api } from "@services/axios";
-import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "@hooks/useAuth";
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+
+import { QUERY_KEYS } from "@constants/queryKeys";
+import { useAuth } from "@hooks/useAuth";
+import { api } from "@services/axios";
 
 export type LoginUserParams = {
   email: string;
   password: string;
 };
-export const useLoginUser = () => {
+export const useLoginUser = (): UseMutationResult<
+  any,
+  Error,
+  LoginUserParams,
+  unknown
+> => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
   return useMutation({

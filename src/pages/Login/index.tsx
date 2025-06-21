@@ -1,14 +1,15 @@
-import React, { useState } from "react";
 import { Container, Box, TextField, Typography, Paper } from "@mui/material";
+import { JSX, useState } from "react";
+
 import { useLoginUser } from "./hooks";
 import ButtonComponent from "@components/Button";
 
-const Login = () => {
+const Login = (): JSX.Element => {
   const { mutate: loginUser, isPending, error, data } = useLoginUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     loginUser({ email, password });
   };
