@@ -6,10 +6,10 @@ export type PRODUCT = {
   stock: number;
   categoryId: string;
   subcategoryId: string;
-  sellerId: string;
+  sellerId?: string;
   actif: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export type PRODUCT_WITH_CATEGORY = PRODUCT & {

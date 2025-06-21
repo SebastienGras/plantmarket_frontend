@@ -7,6 +7,7 @@ import Login from "@pages/Login";
 import Profile from "@pages/Profile";
 import Register from "@pages/Register";
 import ProductPage from "@pages/Product";
+import EditProductPage from "@pages/EditProductPage";
 
 const PlantRouter = (): JSX.Element => (
   <Routes>
@@ -15,6 +16,7 @@ const PlantRouter = (): JSX.Element => (
     <Route path={ALL_ROUTES.REGISTER} element={<Register />} />
     <Route path={ALL_ROUTES.PRODUCT} element={<ProductPage />} />
     <Route path={ALL_ROUTES.PROFILE} element={<Profile />} />
+    <Route path={ALL_ROUTES.EDIT_PRODUCT} element={<EditProductPage />} />
   </Routes>
 );
 
