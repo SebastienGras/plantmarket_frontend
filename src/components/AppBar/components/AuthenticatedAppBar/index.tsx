@@ -1,5 +1,5 @@
+import ButtonComponent from "@components/Button";
 import { useAuth } from "@hooks/useAuth";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const AuthenticatedAppBar = () => {
@@ -14,10 +14,19 @@ const AuthenticatedAppBar = () => {
 
   return (
     <>
-      <Button color="inherit">Mon profil</Button>
-      <Button color="inherit" onClick={handleSignoutClick}>
-        Déconnexion
-      </Button>
+      <ButtonComponent
+        variant="text"
+        color="inherit"
+        text="Mon profil"
+        fullWidth={false}
+      />
+      <ButtonComponent
+        variant="text"
+        color="inherit"
+        text="Déconnexion"
+        onClick={handleSignoutClick}
+        fullWidth={false}
+      />
     </>
   );
 };

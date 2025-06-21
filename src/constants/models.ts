@@ -16,3 +16,18 @@ export type PRODUCT_WITH_CATEGORY = PRODUCT & {
   categoryName: string;
   subcategoryName: string;
 };
+
+export type CATEGORY = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+};
+
+export type SUBCATEGORY = {
+  id: string;
+  categoryId: string;
+  name: string;
+  slug: string;
+  description: string;
+};

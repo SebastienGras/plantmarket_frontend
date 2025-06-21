@@ -1,9 +1,10 @@
-import { AppBar, Button, Toolbar } from "@mui/material";
+import { AppBar, Box, Toolbar } from "@mui/material";
 import AuthenticatedAppBar from "./AuthenticatedAppBar";
 import UnauthenticatedAppBar from "./UnauthenticatedAppBar";
 import { useNavigate } from "react-router-dom";
 import { PUBLIC_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
+import ButtonComponent from "@components/Button";
 
 const AppBarComponent = () => {
   const { user } = useAuth();
@@ -12,14 +13,16 @@ const AppBarComponent = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Button
+        <ButtonComponent
           variant="text"
-          color="secondary"
+          color="success"
           onClick={() => navigate(PUBLIC_ROUTES.HOME)}
-        >
-          PlantMarket
-        </Button>
-        {user?.token ? <AuthenticatedAppBar /> : <UnauthenticatedAppBar />}
+          text="PlantMarket"
+          fullWidth={false}
+        />
+        <Box flexGrow={1} display="flex" justifyContent="flex-end">
+          {user?.token ? <AuthenticatedAppBar /> : <UnauthenticatedAppBar />}
+        </Box>
       </Toolbar>
     </AppBar>
   );

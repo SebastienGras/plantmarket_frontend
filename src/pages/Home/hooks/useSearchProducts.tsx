@@ -3,14 +3,21 @@ import { QUERY_KEYS } from "@constants/queryKeys";
 import { TIME } from "@constants/time";
 import { api } from "@services/axios";
 import { useQuery } from "@tanstack/react-query";
+import { buildProductSearchUrl } from "../utils";
+import { HOME_FILTERS } from "../constants";
 
-export const useSearchProducts = (search: string) =>
+export const useSearchProducts = ({
+  search,
+  categoryId,
+  subcategoryId,
+}: HOME_FILTERS) =>
   useQuery({
-    queryKey: [QUERY_KEYS.PRODUCTS_SEARCH, { search }],
+    queryKey: [
+      QUERY_KEYS.PRODUCTS_SEARCH,
+      { search, categoryId, subcategoryId },
+    ],
     queryFn: async () => {
-      const url = search
-        ? `/products?search=${encodeURIComponent(search)}`
-        : "/products";
+      const url = buildProductSearchUrl({ search, categoryId, subcategoryId });
 
       const response = await api.get<PRODUCT_WITH_CATEGORY[]>(url);
       return response.data;

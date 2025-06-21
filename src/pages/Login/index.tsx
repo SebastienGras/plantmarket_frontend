@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Paper,
-} from "@mui/material";
+import { Container, Box, TextField, Typography, Paper } from "@mui/material";
 import { useLoginUser } from "./hooks";
+import ButtonComponent from "@components/Button";
 
 const Login: React.FC = () => {
   const { mutate: loginUser, isPending, error, data } = useLoginUser();
@@ -48,9 +42,7 @@ const Login: React.FC = () => {
             required
             fullWidth
           />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Login
-          </Button>
+          <ButtonComponent text="Login" type="submit" />
           {isPending && <Typography>Loading...</Typography>}
           {error && (
             <Typography color="error">
