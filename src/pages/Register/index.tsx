@@ -8,7 +8,7 @@ import {
   Box,
 } from "@mui/material";
 import { useRegister } from "./hooks/useRegister";
-import ButtonComponent from "@components/Button/intex";
+import ButtonComponent from "@components/Button";
 
 const Register = () => {
   const { mutate: registerMutation, isPending, error } = useRegister();

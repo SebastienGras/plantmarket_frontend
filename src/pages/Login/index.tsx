@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Box, TextField, Typography, Paper } from "@mui/material";
 import { useLoginUser } from "./hooks";
-import ButtonComponent from "@components/Button/intex";
+import ButtonComponent from "@components/Button";
 
 const Login: React.FC = () => {
   const { mutate: loginUser, isPending, error, data } = useLoginUser();
