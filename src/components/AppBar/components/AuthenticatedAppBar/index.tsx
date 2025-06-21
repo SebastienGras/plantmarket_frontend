@@ -1,4 +1,5 @@
 import ButtonComponent from "@components/Button";
+import { AUTHENTICATED_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
 import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,7 @@ const AuthenticatedAppBar = (): JSX.Element => {
         color="inherit"
         text="Mon profil"
         fullWidth={false}
+        onClick={() => navigate(AUTHENTICATED_ROUTES.PROFILE)}
       />
       <ButtonComponent
         variant="text"

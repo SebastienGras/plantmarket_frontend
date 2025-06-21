@@ -1,39 +1,76 @@
+import { useState } from "react";
 import {
-  Container,
   Box,
-  Avatar,
+  List,
+  ListItemButton,
+  ListItemText,
   Typography,
+  Divider,
   Paper,
-  Button,
 } from "@mui/material";
+import Products from "./Products";
+import AddProduct from "./AddProduct";
+import EditProfile from "./EditProfile";
 
-const user = {
-  name: "Thomas Plant",
-  email: "thomas@example.com",
-  avatarUrl: "https://i.pravatar.cc/150?img=3",
+const ProfilePage = () => {
+  const [selectedTab, setSelectedTab] = useState<
+    "products" | "add" | "profile"
+  >("products");
+
+  return (
+    <Box
+      sx={{ display: "flex", height: "100vh", bgcolor: "background.default" }}
+    >
+      <Paper
+        elevation={3}
+        sx={{
+          width: 240,
+          display: "flex",
+          flexDirection: "column",
+          pt: 2,
+          pb: 2,
+          px: 2,
+        }}
+      >
+        <Typography variant="h6" mb={2}>
+          Mon espace
+        </Typography>
+        <Divider />
+        <List component="nav">
+          <ListItemButton
+            selected={selectedTab === "products"}
+            onClick={() => setSelectedTab("products")}
+          >
+            <ListItemText primary="Mes produits" />
+          </ListItemButton>
+          <ListItemButton
+            selected={selectedTab === "add"}
+            onClick={() => setSelectedTab("add")}
+          >
+            <ListItemText primary="Ajouter un produit" />
+          </ListItemButton>
+          <ListItemButton
+            selected={selectedTab === "profile"}
+            onClick={() => setSelectedTab("profile")}
+          >
+            <ListItemText primary="Modifier mon profil" />
+          </ListItemButton>
+        </List>
+      </Paper>
+
+      <Box
+        sx={{
+          flexGrow: 1,
+          p: 4,
+          overflowY: "auto",
+        }}
+      >
+        {selectedTab === "products" && <Products />}
+        {selectedTab === "add" && <AddProduct />}
+        {selectedTab === "profile" && <EditProfile />}
+      </Box>
+    </Box>
+  );
 };
 
-const Profile: React.FC = () => (
-  <Container maxWidth="sm" sx={{ mt: 8 }}>
-    <Paper elevation={3} sx={{ p: 4 }}>
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <Avatar
-          src={user.avatarUrl}
-          alt={user.name}
-          sx={{ width: 96, height: 96, mb: 2 }}
-        />
-        <Typography variant="h5" gutterBottom>
-          {user.name}
-        </Typography>
-        <Typography variant="body1" color="text.secondary" gutterBottom>
-          {user.email}
-        </Typography>
-        <Button variant="contained" sx={{ mt: 2 }}>
-          Edit Profile
-        </Button>
-      </Box>
-    </Paper>
-  </Container>
-);
-
-export default Profile;
+export default ProfilePage;
