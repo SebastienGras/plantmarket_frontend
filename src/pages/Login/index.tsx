@@ -3,7 +3,7 @@ import { Container, Box, TextField, Typography, Paper } from "@mui/material";
 import { useLoginUser } from "./hooks";
 import ButtonComponent from "@components/Button";
 
-const Login: React.FC = () => {
+const Login = () => {
   const { mutate: loginUser, isPending, error, data } = useLoginUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
