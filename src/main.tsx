@@ -8,19 +8,22 @@ import { AuthProvider } from "@contexts/AuthContext";
 
 import App from "./App";
 import theme from "./theme";
+import { SnackbarProvider } from "@contexts/SnackbarContext";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <QueryClientProvider client={queryClient}>
-            <App />
-          </QueryClientProvider>
-        </BrowserRouter>
-      </ThemeProvider>
-    </AuthProvider>
+    <SnackbarProvider>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <QueryClientProvider client={queryClient}>
+              <App />
+            </QueryClientProvider>
+          </BrowserRouter>
+        </ThemeProvider>
+      </AuthProvider>
+    </SnackbarProvider>
   </React.StrictMode>
 );
