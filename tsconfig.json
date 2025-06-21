@@ -22,7 +22,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "exactOptionalPropertyTypes": true,
     "incremental": true,
-    "types": ["vite/client", "@testing-library/jest-dom"],
+    "types": ["vite/client"],
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["components/*"],
