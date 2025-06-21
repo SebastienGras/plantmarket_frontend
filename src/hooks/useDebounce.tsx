@@ -8,7 +8,7 @@ export function useDebounce<T>(value: T, delay: number): T {
       setDebounced(value);
     }, delay);
 
-    return () => clearTimeout(handler);
+    return (): void => clearTimeout(handler);
   }, [value, delay]);
 
   return debounced;

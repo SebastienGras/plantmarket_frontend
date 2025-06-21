@@ -7,18 +7,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
 import Grid from "@mui/material/Grid";
+import { JSX, useState } from "react";
 
-import { useState } from "react";
-import { useSearchProducts } from "./hooks/useSearchProducts";
 import { useDebounce } from "@hooks/useDebounce";
+
 import { HOME_TEXTS } from "./constants";
 import CategorySelect from "./components/CategorySelect";
 import SubcategorySelect from "./components/SubcategorySelect";
 import { formatPrice } from "@utils/format";
+import { useSearchProducts } from "./hooks/useSearchProducts";
 
-const Home = () => {
+const Home = (): JSX.Element => {
   const [query, setQuery] = useState({
     search: "",
     categoryId: "",

@@ -1,4 +1,5 @@
 import { useLocation, matchPath } from "react-router-dom";
+
 import { PUBLIC_ROUTES } from "@constants/routes";
 
 const useIsPublicRoute = (): boolean => {

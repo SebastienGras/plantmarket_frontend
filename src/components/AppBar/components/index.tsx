@@ -1,12 +1,15 @@
 import { AppBar, Box, Toolbar } from "@mui/material";
-import AuthenticatedAppBar from "./AuthenticatedAppBar";
-import UnauthenticatedAppBar from "./UnauthenticatedAppBar";
+import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { PUBLIC_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
 import ButtonComponent from "@components/Button";
 
-const AppBarComponent = () => {
+import AuthenticatedAppBar from "./AuthenticatedAppBar";
+import UnauthenticatedAppBar from "./UnauthenticatedAppBar";
+
+const AppBarComponent = (): JSX.Element => {
   const { user } = useAuth();
 
   const navigate = useNavigate();

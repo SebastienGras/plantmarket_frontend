@@ -1,8 +1,9 @@
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+
 import { PRODUCT_WITH_CATEGORY } from "@constants/models";
 import { QUERY_KEYS } from "@constants/queryKeys";
 import { TIME } from "@constants/time";
 import { api } from "@services/axios";
-import { useQuery } from "@tanstack/react-query";
 import { buildProductSearchUrl } from "../utils";
 import { HOME_FILTERS } from "../constants";
 
@@ -10,7 +11,7 @@ export const useSearchProducts = ({
   search,
   categoryId,
   subcategoryId,
-}: HOME_FILTERS) =>
+}: HOME_FILTERS): UseQueryResult<PRODUCT_WITH_CATEGORY[], Error> =>
   useQuery({
     queryKey: [
       QUERY_KEYS.PRODUCTS_SEARCH,

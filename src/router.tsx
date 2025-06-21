@@ -1,11 +1,13 @@
+import { JSX } from "react";
 import { Routes, Route } from "react-router-dom";
+
+import { ALL_ROUTES } from "@constants/routes";
+import Home from "@pages/Home";
 import Login from "@pages/Login";
 import Profile from "@pages/Profile";
-import Home from "@pages/Home";
-import { ALL_ROUTES } from "@constants/routes";
 import Register from "@pages/Register";
 
-const PlantRouter = () => (
+const PlantRouter = (): JSX.Element => (
   <Routes>
     <Route path={ALL_ROUTES.HOME} element={<Home />} />
     <Route path={ALL_ROUTES.LOGIN} element={<Login />} />
