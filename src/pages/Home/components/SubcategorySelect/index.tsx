@@ -1,14 +1,7 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  CircularProgress,
-} from "@mui/material";
+import { SelectChangeEvent } from "@mui/material";
 import { useGetSubcategoriesByCategoryId } from "../../hooks/useGetSubcategoriesByCategoryId";
 import { HOME_FILTERS } from "@pages/Home/constants";
+import SelectComponent from "@components/Select";
 
 const SubcategorySelect = ({
   categoryId,
@@ -27,30 +20,13 @@ const SubcategorySelect = ({
   };
 
   return (
-    <Box>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <FormControl fullWidth variant="outlined" sx={{ maxWidth: 300 }}>
-          <InputLabel id="category-label">Sous Catégorie</InputLabel>
-          <Select
-            labelId="category-label"
-            value={query.subcategoryId || ""}
-            label="Sous Catégorie"
-            onChange={handleSubcategoryChange}
-          >
-            <MenuItem value="">
-              <em>Toutes</em>
-            </MenuItem>
-            {subcategories?.map((subcategory) => (
-              <MenuItem key={subcategory.id} value={subcategory.id}>
-                {subcategory.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      )}
-    </Box>
+    <SelectComponent
+      label="Sous-catégorie"
+      handleChange={handleSubcategoryChange}
+      datas={subcategories}
+      isLoading={isLoading}
+      selected={query.subcategoryId || ""}
+    />
   );
 };
 
