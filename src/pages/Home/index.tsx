@@ -14,9 +14,16 @@ import { useState } from "react";
 import { useSearchProducts } from "./hooks/useSearchProducts";
 import { useDebounce } from "@hooks/useDebounce";
 import { HOME_TEXTS } from "./constants";
+import CategorySelect from "./components/CategorySelect";
+import SubcategorySelect from "./components/SubcategorySelect";
+import { formatPrice } from "@utils/format";
 
 const Home = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState({
+    search: "",
+    categoryId: "",
+    subcategoryId: "",
+  });
   const debouncedSearch = useDebounce(query, 500);
 
   const {
@@ -31,14 +38,21 @@ const Home = () => {
         {HOME_TEXTS.RESEARCH}
       </Typography>
 
-      <Box display="flex" gap={2} mb={4}>
+      <Box display="flex" gap={2} mb={4} justifyContent="space-between">
         <TextField
           label={HOME_TEXTS.PLANT_NAME}
           variant="outlined"
-          fullWidth
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={query.search}
+          onChange={(e) => setQuery({ ...query, search: e.target.value })}
         />
+        <CategorySelect setQuery={setQuery} query={query} />
+        {query.categoryId && (
+          <SubcategorySelect
+            categoryId={query.categoryId}
+            setQuery={setQuery}
+            query={query}
+          />
+        )}
       </Box>
 
       {isProductsLoading && <CircularProgress />}
@@ -60,6 +74,9 @@ const Home = () => {
                 <Typography variant="h6">{product.title}</Typography>
                 <Typography variant="body2" color="text.secondary">
                   {product.description}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {formatPrice(product.price)}
                 </Typography>
               </CardContent>
             </Card>
