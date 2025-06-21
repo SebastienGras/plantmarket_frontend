@@ -17,6 +17,7 @@ import CategorySelect from "./components/CategorySelect";
 import SubcategorySelect from "./components/SubcategorySelect";
 import { formatPrice } from "@utils/format";
 import { useSearchProducts } from "./hooks/useSearchProducts";
+import { Link } from "react-router-dom";
 
 const Home = (): JSX.Element => {
   const [query, setQuery] = useState({
@@ -63,7 +64,11 @@ const Home = (): JSX.Element => {
       <Grid container spacing={3}>
         {products?.map((product) => (
           <Grid key={product.id} size={6}>
-            <Card>
+            <Card
+              component={Link}
+              to={`/products/${product.id}`}
+              sx={{ textDecoration: "none" }} // enlève soulignement
+            >
               <CardMedia
                 component="img"
                 height="180"

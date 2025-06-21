@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
   CATEGORIES: "categories",
   SUBCATEGORIES_BY_CATEGORY_ID: "subcategories",
   ADD_PRODUCT: "addProduct",
+  PRODUCT: "product",
 };
