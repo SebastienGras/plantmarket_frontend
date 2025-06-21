@@ -1,4 +1,4 @@
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Box, Toolbar } from "@mui/material";
 import AuthenticatedAppBar from "./AuthenticatedAppBar";
 import UnauthenticatedAppBar from "./UnauthenticatedAppBar";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,9 @@ const AppBarComponent = () => {
           text="PlantMarket"
           fullWidth={false}
         />
-        {user?.token ? <AuthenticatedAppBar /> : <UnauthenticatedAppBar />}
+        <Box flexGrow={1} display="flex" justifyContent="flex-end">
+          {user?.token ? <AuthenticatedAppBar /> : <UnauthenticatedAppBar />}
+        </Box>
       </Toolbar>
     </AppBar>
   );
