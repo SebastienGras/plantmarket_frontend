@@ -12,6 +12,7 @@ import {
   ListItemAvatar,
   Avatar,
 } from "@mui/material";
+import { formatPrice } from "@utils/format";
 
 const Products = () => {
   const { user } = useAuth();
@@ -52,7 +53,7 @@ const Products = () => {
             </ListItemAvatar>
             <ListItemText
               primary={product.title}
-              secondary={`Prix : ${product.price.toFixed(2)} €`}
+              secondary={`Prix : ${formatPrice(product.price)}`}
             />
           </ListItem>
         ))}
