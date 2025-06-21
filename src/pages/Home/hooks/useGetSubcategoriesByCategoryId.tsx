@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "@services/axios";
 import { QUERY_KEYS } from "@constants/queryKeys";
 import { SUBCATEGORY } from "@constants/models";
+import { TIME } from "@constants/time";
 
 export const useGetSubcategoriesByCategoryId = (categoryId: string) =>
   useQuery<SUBCATEGORY[]>({
@@ -12,4 +13,6 @@ export const useGetSubcategoriesByCategoryId = (categoryId: string) =>
       );
       return data;
     },
+    staleTime: TIME.FIVE_MINUTES_IN_MILLISECONDS,
+    enabled: !!categoryId,
   });

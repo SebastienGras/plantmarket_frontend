@@ -28,7 +28,7 @@ export const useLoginUser = (): UseMutationResult<
     },
     onSuccess: (data) => {
       localStorage.setItem("user", JSON.stringify(data));
-      setUser({ ...data.user, token: data.token });
+      setUser(data);
       navigate("/");
     },
   });
