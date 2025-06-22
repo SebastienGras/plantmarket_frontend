@@ -5,7 +5,7 @@ export const HOME_TEXTS = {
 };
 
 export type HOME_FILTERS = {
-  search?: string;
-  categoryId?: string;
-  subcategoryId?: string;
+  search?: string | undefined;
+  categoryId?: string | undefined;
+  subcategoryId?: string | undefined;
 };

@@ -10,6 +10,9 @@ import globals from "globals";
 
 export default [
   {
+    ignores: ["dist/**", "node_modules/**", "build/**"],
+  },
+  {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
       parser: tsParser,
