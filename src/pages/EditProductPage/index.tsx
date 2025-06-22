@@ -1,10 +1,12 @@
+import { JSX } from "react";
 import { useParams } from "react-router-dom";
-import ProductForm from "./components/ProductForm"; // formulaire réutilisable
+
 import { useGetProductById } from "@hooks/useGetProductById";
 
-const EditProductPage = () => {
+import ProductForm from "./components/ProductForm";
+
+const EditProductPage = (): JSX.Element => {
   const { id } = useParams();
-  console.log("EditProductPage id:", id);
   const { data: product, isLoading } = useGetProductById(id!);
 
   if (isLoading || !product) return <div>Chargement...</div>;

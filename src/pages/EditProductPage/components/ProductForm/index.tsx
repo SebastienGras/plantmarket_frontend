@@ -7,35 +7,28 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Form, Field } from "react-final-form";
 import { zodValidator } from "@utils/validator";
-import { EditProductSchema } from "./validator";
+import { JSX } from "react";
+import { Form, Field } from "react-final-form";
+
+import { PRODUCT } from "@constants/models";
 import { useGetCategories } from "@pages/Home/hooks/useGetCategories";
 import { useGetSubcategoriesByCategoryId } from "@pages/Home/hooks/useGetSubcategoriesByCategoryId";
+
 import { useUpdateProduct } from "../../hooks/useUpdateProduct";
 
+import { EditProductSchema } from "./validator";
+
 type EditProductFormProps = {
-  product: {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    stock: number;
-    categoryId: string;
-    subcategoryId: string;
-    actif: boolean;
-    sellerId?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-  };
+  product: PRODUCT;
 };
 
-const EditProductForm = ({ product }: EditProductFormProps) => {
+const EditProductForm = ({ product }: EditProductFormProps): JSX.Element => {
   const { data: categories } = useGetCategories();
 
   const { mutate: updateProduct, isPending } = useUpdateProduct(product.id);
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: any): void => {
     updateProduct({
       id: product.id,
       title: values.title,
@@ -63,6 +56,7 @@ const EditProductForm = ({ product }: EditProductFormProps) => {
         validate={zodValidator(EditProductSchema)}
         render={({ handleSubmit, submitting, values }) => {
           const { data: updatedSubcategories } =
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             useGetSubcategoriesByCategoryId(values.categoryId);
 
           return (

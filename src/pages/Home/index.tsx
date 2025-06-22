@@ -67,7 +67,7 @@ const Home = (): JSX.Element => {
             <Card
               component={Link}
               to={`/products/${product.id}`}
-              sx={{ textDecoration: "none" }} // enlève soulignement
+              sx={{ textDecoration: "none" }}
             >
               <CardMedia
                 component="img"
