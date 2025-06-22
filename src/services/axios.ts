@@ -1,25 +1,20 @@
 import axios from "axios";
 
-const getBearerToken = (): string => {
-  const user = localStorage.getItem("user");
-  if (user) {
-    const parsedUser = JSON.parse(user);
-    return parsedUser.token || "";
-  }
-  return "";
-};
-
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: import.meta.env["VITE_API_URL"] || "http://localhost:3000",
   headers: {
-    Authorization: `Bearer ${getBearerToken()}`,
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    "Access-Control-Allow-Credentials": "true",
-    "Access-Control-Expose-Headers": "Content-Length, X-JSON",
-    "Cache-Control": "no-cache",
   },
   withCredentials: true,
+});
+
+api.interceptors.request.use((config) => {
+  const user = localStorage.getItem("user");
+  const token = user ? JSON.parse(user)?.token : null;
+
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
 });

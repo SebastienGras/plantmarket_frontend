@@ -1,33 +1,41 @@
-name: prod
+name: Deploy React app to S3
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build-and-test:
+  deploy:
+    name: 🚀 Deploy Frontend
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout le code
+      - name: 📥 Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: "npm"
 
-      - name: Installer les dépendances
+      - name: 🧪 Install dependencies
         run: npm install
-        working-directory: ./
 
-      - name: Lancer les tests
-        run: npm test
-        working-directory: ./
+      - name: 📄 Create .env.production
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > .env.production
 
-      - name: Compiler le projet (build)
+      - name: 🏗️ Build app (production)
         run: npm run build
-        working-directory: ./
+
+      - name: ☁️ Deploy to S3
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SOURCE_DIR: dist
