@@ -16,11 +16,11 @@ import { formatPrice } from "@utils/format";
 
 import CategorySelect from "./components/CategorySelect";
 import SubcategorySelect from "./components/SubcategorySelect";
-import { HOME_TEXTS } from "./constants";
+import { HOME_FILTERS, HOME_TEXTS } from "./constants";
 import { useSearchProducts } from "./hooks/useSearchProducts";
 
 const Home = (): JSX.Element => {
-  const [query, setQuery] = useState({
+  const [query, setQuery] = useState<HOME_FILTERS>({
     search: "",
     categoryId: "",
     subcategoryId: "",
