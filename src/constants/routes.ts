@@ -15,6 +15,7 @@ export const AUTHENTICATED_ROUTES = {
   LOGOUT: "/logout",
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const ROUTES_WITH_PARAMS = (params: Record<string, string>) => ({
   PRODUCT: `/products/${params["id"]}`,
   EDIT_PRODUCT: `/products/${params["id"]}/edit`,
