@@ -1,5 +1,4 @@
 // eslint.config.js
-import js from "@eslint/js";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import importPlugin from "eslint-plugin-import";
@@ -45,7 +44,7 @@ export default [
       "@typescript-eslint/no-explicit-any": "off",
 
       "import/order": [
-        "warn",
+        "error",
         {
           groups: [
             "builtin",
