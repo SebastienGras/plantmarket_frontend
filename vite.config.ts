@@ -9,6 +9,25 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    outDir: "dist",
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        chunkFileNames: "assets/js/[name]-[hash].js",
+        entryFileNames: "assets/js/[name]-[hash].js",
+        assetFileNames: ({ name }) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? "")) {
+            return "assets/images/[name]-[hash][extname]";
+          }
+          if (/\.css$/.test(name ?? "")) {
+            return "assets/css/[name]-[hash][extname]";
+          }
+          return "assets/[name]-[hash][extname]";
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       "@components": path.resolve(__dirname, "./src/components"),
@@ -25,4 +44,5 @@ export default defineConfig({
   server: {
     open: true,
   },
+  base: "/",
 });
