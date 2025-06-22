@@ -14,17 +14,24 @@ import {
   ListItemSecondaryAction,
 } from "@mui/material";
 import { JSX } from "react";
-import { useNavigate } from "react-router-dom";
 
-import { ROUTES_WITH_PARAMS } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
 import { formatPrice } from "@utils/format";
 
 import { useGetUserProducts } from "./hooks/useGetUserProducts";
 
-const Products = (): JSX.Element => {
+type ProductsProps<T extends string> = {
+  editTab: T;
+  setSelectedTab: (tab: T) => void;
+  setProductId: (id: string) => void;
+};
+
+const Products = <T extends string>({
+  editTab,
+  setSelectedTab,
+  setProductId,
+}: ProductsProps<T>): JSX.Element => {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const {
     data: products,
     isLoading,
@@ -91,9 +98,10 @@ const Products = (): JSX.Element => {
             <ListItemSecondaryAction>
               <Button
                 variant="outlined"
-                onClick={() =>
-                  navigate(ROUTES_WITH_PARAMS({ id: product.id }).EDIT_PRODUCT)
-                }
+                onClick={() => {
+                  setProductId(product.id);
+                  setSelectedTab(editTab);
+                }}
               >
                 Modifier
               </Button>

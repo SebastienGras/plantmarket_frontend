@@ -11,7 +11,6 @@ export const AUTHENTICATED_ROUTES = {
   CART: "/cart",
   ORDERS: "/orders",
   ADD_PRODUCT: "/products/add",
-  EDIT_PRODUCT: "/products/:id/edit",
   USER_PRODUCTS: "/products/user/:userId",
   LOGOUT: "/logout",
 };

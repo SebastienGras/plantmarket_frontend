@@ -2,7 +2,6 @@ import { JSX } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { ALL_ROUTES } from "@constants/routes";
-import EditProductPage from "@pages/EditProductPage";
 import Home from "@pages/Home";
 import Login from "@pages/Login";
 import ProductPage from "@pages/Product";
@@ -16,7 +15,6 @@ const PlantRouter = (): JSX.Element => (
     <Route path={ALL_ROUTES.REGISTER} element={<Register />} />
     <Route path={ALL_ROUTES.PRODUCT} element={<ProductPage />} />
     <Route path={ALL_ROUTES.PROFILE} element={<Profile />} />
-    <Route path={ALL_ROUTES.EDIT_PRODUCT} element={<EditProductPage />} />
   </Routes>
 );
 
