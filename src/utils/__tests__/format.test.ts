@@ -1,5 +1,6 @@
-import { formatPrice } from "../format";
 import { describe, it, expect } from "vitest";
+
+import { formatPrice } from "../format";
 
 // \u202f = espace insécable
 // \u00a0 = espace insécable avant €

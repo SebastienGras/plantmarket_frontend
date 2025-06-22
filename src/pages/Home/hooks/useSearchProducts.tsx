@@ -4,8 +4,9 @@ import { PRODUCT_WITH_CATEGORY } from "@constants/models";
 import { QUERY_KEYS } from "@constants/queryKeys";
 import { TIME } from "@constants/time";
 import { api } from "@services/axios";
-import { buildProductSearchUrl } from "../utils";
+
 import { HOME_FILTERS } from "../constants";
+import { buildProductSearchUrl } from "../utils";
 
 export const useSearchProducts = ({
   search,

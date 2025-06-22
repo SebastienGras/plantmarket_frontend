@@ -1,14 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
-import { api } from "@services/axios";
-import { QUERY_KEYS } from "@constants/queryKeys";
-import { SUBCATEGORY } from "@constants/models";
-import { TIME } from "@constants/time";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-export const useGetSubcategoriesByCategoryId = (categoryId: string) =>
+import { SUBCATEGORY } from "@constants/models";
+import { QUERY_KEYS } from "@constants/queryKeys";
+import { TIME } from "@constants/time";
+import { api } from "@services/axios";
+
+export const useGetSubcategoriesByCategoryId = (
+  categoryId: string
+): UseQueryResult<SUBCATEGORY[], Error> =>
   useQuery<SUBCATEGORY[]>({
     queryKey: [QUERY_KEYS.SUBCATEGORIES_BY_CATEGORY_ID, categoryId],
     queryFn: async () => {
-      const { data } = await api.get(
+      const { data } = await api.get<SUBCATEGORY[]>(
         `/${QUERY_KEYS.SUBCATEGORIES_BY_CATEGORY_ID}/${categoryId}`
       );
       return data;

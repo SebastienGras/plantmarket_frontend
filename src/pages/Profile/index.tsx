@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Box,
   List,
@@ -8,11 +7,13 @@ import {
   Divider,
   Paper,
 } from "@mui/material";
-import Products from "./Products";
+import { JSX, useState } from "react";
+
 import AddProduct from "./AddProduct";
 import EditProfile from "./EditProfile";
+import Products from "./Products";
 
-const ProfilePage = () => {
+const ProfilePage = (): JSX.Element => {
   const [selectedTab, setSelectedTab] = useState<
     "products" | "add" | "profile"
   >("products");

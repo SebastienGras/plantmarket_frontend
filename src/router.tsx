@@ -2,12 +2,12 @@ import { JSX } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { ALL_ROUTES } from "@constants/routes";
+import EditProductPage from "@pages/EditProductPage";
 import Home from "@pages/Home";
 import Login from "@pages/Login";
+import ProductPage from "@pages/Product";
 import Profile from "@pages/Profile";
 import Register from "@pages/Register";
-import ProductPage from "@pages/Product";
-import EditProductPage from "@pages/EditProductPage";
 
 const PlantRouter = (): JSX.Element => (
   <Routes>

@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -9,9 +8,12 @@ import {
   Grid,
   Chip,
 } from "@mui/material";
+import { JSX } from "react";
+import { useParams } from "react-router-dom";
+
 import { useGetProductById } from "../../hooks/useGetProductById";
 
-const ProductPage = () => {
+const ProductPage = (): JSX.Element => {
   const { id: productId } = useParams();
   const { data: product, isLoading, isError } = useGetProductById(productId!);
 

@@ -1,17 +1,28 @@
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
+
 import { PRODUCT } from "@constants/models";
 import { QUERY_KEYS } from "@constants/queryKeys";
-import { useSnackbar } from "@contexts/SnackbarContext";
+import { useSnackbar } from "@hooks/useSnackbar";
 import { api } from "@services/axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useUpdateProduct = (productId: string) => {
+export const useUpdateProduct = (
+  productId: string
+): UseMutationResult<any, Error, PRODUCT, unknown> => {
   const { showSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: [QUERY_KEYS.PRODUCT, productId, "edit"],
     mutationFn: async (productData: PRODUCT) => {
-      const response = await api.patch(`/products/${productId}`, productData);
+      const response = await api.patch<any, AxiosResponse<PRODUCT>, PRODUCT>(
+        `/products/${productId}`,
+        productData
+      );
       return response.data;
     },
     onSuccess: () => {

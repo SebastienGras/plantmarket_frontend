@@ -1,10 +1,13 @@
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+
 import { PRODUCT_WITH_CATEGORY } from "@constants/models";
 import { QUERY_KEYS } from "@constants/queryKeys";
 import { TIME } from "@constants/time";
 import { api } from "@services/axios";
-import { useQuery } from "@tanstack/react-query";
 
-export const useGetUserProducts = (userId: string) =>
+export const useGetUserProducts = (
+  userId: string
+): UseQueryResult<PRODUCT_WITH_CATEGORY[], Error> =>
   useQuery({
     queryKey: [QUERY_KEYS.PRODUCTS_SEARCH, { userId }],
     queryFn: async () => {

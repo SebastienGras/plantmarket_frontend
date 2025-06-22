@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
+import { JSX } from "react";
 
-const EditProfile = () => (
+const EditProfile = (): JSX.Element => (
   <Box>
     <Typography variant="h5" gutterBottom>
       Modifier mon profil

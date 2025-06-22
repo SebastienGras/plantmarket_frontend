@@ -1,6 +1,8 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { USER } from "@constants/models";
 import { QUERY_KEYS } from "@constants/queryKeys";
 import { useAuth } from "@hooks/useAuth";
 import { api } from "@services/axios";
@@ -20,10 +22,13 @@ export const useLoginUser = (): UseMutationResult<
   return useMutation({
     mutationKey: [QUERY_KEYS.AUTH_LOGIN],
     mutationFn: async ({ email, password }: LoginUserParams) => {
-      const response = await api.post(QUERY_KEYS.AUTH_LOGIN, {
-        email,
-        password,
-      });
+      const response = await api.post<any, AxiosResponse<USER>>(
+        QUERY_KEYS.AUTH_LOGIN,
+        {
+          email,
+          password,
+        }
+      );
       return response.data;
     },
     onSuccess: (data) => {

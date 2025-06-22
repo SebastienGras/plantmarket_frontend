@@ -9,15 +9,15 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { JSX, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { useDebounce } from "@hooks/useDebounce";
+import { formatPrice } from "@utils/format";
 
-import { HOME_TEXTS } from "./constants";
 import CategorySelect from "./components/CategorySelect";
 import SubcategorySelect from "./components/SubcategorySelect";
-import { formatPrice } from "@utils/format";
+import { HOME_TEXTS } from "./constants";
 import { useSearchProducts } from "./hooks/useSearchProducts";
-import { Link } from "react-router-dom";
 
 const Home = (): JSX.Element => {
   const [query, setQuery] = useState({

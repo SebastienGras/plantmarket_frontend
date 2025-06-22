@@ -9,8 +9,9 @@ import {
 import { JSX } from "react";
 import { Form, Field } from "react-final-form";
 
-import { useRegister } from "./hooks/useRegister";
 import ButtonComponent from "@components/Button";
+
+import { useRegister } from "./hooks/useRegister";
 
 const Register = (): JSX.Element => {
   const { mutate: registerMutation, isPending, error } = useRegister();

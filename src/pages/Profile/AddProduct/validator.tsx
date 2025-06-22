@@ -1,6 +1,5 @@
 import z from "zod";
 
-// ✅ Schéma de validation avec Zod
 export const AddProductSchema = z.object({
   title: z.string().min(1, "Le titre est requis"),
   description: z.string().min(1, "La description est requise"),

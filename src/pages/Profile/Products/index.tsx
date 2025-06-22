@@ -1,6 +1,3 @@
-import { ROUTES_WITH_PARAMS } from "@constants/routes";
-import { useGetUserProducts } from "./hooks/useGetUserProducts";
-import { useAuth } from "@hooks/useAuth";
 import {
   Box,
   Typography,
@@ -16,10 +13,16 @@ import {
   Chip,
   ListItemSecondaryAction,
 } from "@mui/material";
-import { formatPrice } from "@utils/format";
+import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Products = () => {
+import { ROUTES_WITH_PARAMS } from "@constants/routes";
+import { useAuth } from "@hooks/useAuth";
+import { formatPrice } from "@utils/format";
+
+import { useGetUserProducts } from "./hooks/useGetUserProducts";
+
+const Products = (): JSX.Element => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const {

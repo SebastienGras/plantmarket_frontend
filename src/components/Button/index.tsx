@@ -1,5 +1,5 @@
-import React from "react";
 import Button from "@mui/material/Button";
+import { JSX } from "react";
 
 type ButtonComponentProps = {
   variant?: "text" | "outlined" | "contained";
@@ -28,7 +28,7 @@ const ButtonComponent = ({
   type = "button",
   disabled = false,
   onClick,
-}: ButtonComponentProps) => {
+}: ButtonComponentProps): JSX.Element => {
   return (
     <Button
       type={type}

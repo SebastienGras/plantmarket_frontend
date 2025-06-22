@@ -1,8 +1,10 @@
-import ButtonComponent from "@components/Button";
-import { PUBLIC_ROUTES } from "@constants/routes";
+import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UnauthenticatedAppBar = () => {
+import ButtonComponent from "@components/Button";
+import { PUBLIC_ROUTES } from "@constants/routes";
+
+const UnauthenticatedAppBar = (): JSX.Element => {
   const navigate = useNavigate();
   return (
     <>

@@ -31,3 +31,19 @@ export type SUBCATEGORY = {
   slug: string;
   description: string;
 };
+
+export type USER = {
+  id: string;
+  token: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber?: string;
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  country?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  isSeller?: boolean;
+};

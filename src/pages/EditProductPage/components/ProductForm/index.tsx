@@ -7,13 +7,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { zodValidator } from "@utils/validator";
 import { JSX } from "react";
 import { Form, Field } from "react-final-form";
 
 import { PRODUCT } from "@constants/models";
 import { useGetCategories } from "@pages/Home/hooks/useGetCategories";
 import { useGetSubcategoriesByCategoryId } from "@pages/Home/hooks/useGetSubcategoriesByCategoryId";
+import { zodValidator } from "@utils/validator";
 
 import { useUpdateProduct } from "../../hooks/useUpdateProduct";
 

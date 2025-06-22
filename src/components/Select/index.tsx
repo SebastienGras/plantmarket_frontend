@@ -7,6 +7,7 @@ import {
   SelectChangeEvent,
   CircularProgress,
 } from "@mui/material";
+import { JSX } from "react";
 
 type SelectComponentProps = {
   label: string;
@@ -30,7 +31,7 @@ const SelectComponent = ({
   fullWidth = true,
   displayAllOption = true,
   allLabel = "Toutes",
-}: SelectComponentProps) => {
+}: SelectComponentProps): JSX.Element => {
   return (
     <Box sx={{ minWidth: 200 }}>
       {isLoading ? (
