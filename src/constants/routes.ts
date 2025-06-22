@@ -11,10 +11,16 @@ export const AUTHENTICATED_ROUTES = {
   CART: "/cart",
   ORDERS: "/orders",
   ADD_PRODUCT: "/products/add",
-  EDIT_PRODUCT: "/products/edit/:id",
+  EDIT_PRODUCT: "/products/:id/edit",
   USER_PRODUCTS: "/products/user/:userId",
   LOGOUT: "/logout",
 };
+
+export const ROUTES_WITH_PARAMS = (params: Record<string, string>) => ({
+  PRODUCT: `/products/${params["id"]}`,
+  EDIT_PRODUCT: `/products/${params["id"]}/edit`,
+  USER_PRODUCTS: `/products/user/${params["userId"]}`,
+});
 
 export const ALL_ROUTES = {
   ...PUBLIC_ROUTES,

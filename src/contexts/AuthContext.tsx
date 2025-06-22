@@ -1,14 +1,10 @@
 import { createContext, useState, ReactNode, JSX } from "react";
 
-type User = {
-  id: string;
-  email: string;
-  token: string;
-};
+import { USER } from "@constants/models";
 
 export type AuthContextType = {
-  user: User | null;
-  setUser: (user: User | null) => void;
+  user: USER | null;
+  setUser: (user: USER | null) => void;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -21,7 +17,7 @@ export const AuthProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  const [user, setUser] = useState<User | null>(() => {
+  const [user, setUser] = useState<USER | null>(() => {
     const saved = localStorage.getItem("user");
     return saved ? JSON.parse(saved) : null;
   });

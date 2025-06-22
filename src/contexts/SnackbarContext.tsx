@@ -1,37 +1,33 @@
-// src/context/SnackbarContext.tsx
-import { createContext, useContext, useState } from "react";
 import { Snackbar, Alert } from "@mui/material";
+import { createContext, JSX, useState } from "react";
 
-type SnackbarContextType = {
+export type SnackbarContextType = {
   showSnackbar: (
     message: string,
     severity?: "success" | "error" | "info" | "warning"
   ) => void;
 };
 
-const SnackbarContext = createContext<SnackbarContextType | undefined>(
+// eslint-disable-next-line react-refresh/only-export-components
+export const SnackbarContext = createContext<SnackbarContextType | undefined>(
   undefined
 );
-
-export const useSnackbar = () => {
-  const ctx = useContext(SnackbarContext);
-  if (!ctx)
-    throw new Error("useSnackbar must be used within a SnackbarProvider");
-  return ctx;
-};
 
 export const SnackbarProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) => {
+}): JSX.Element => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<
     "success" | "error" | "info" | "warning"
   >("success");
 
-  const showSnackbar = (msg: string, sev: typeof severity = "success") => {
+  const showSnackbar = (
+    msg: string,
+    sev: typeof severity = "success"
+  ): void => {
     setMessage(msg);
     setSeverity(sev);
     setOpen(true);

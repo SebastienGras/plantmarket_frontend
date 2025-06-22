@@ -1,5 +1,3 @@
-import { useGetUserProducts } from "./hooks/useGetUserProducts";
-import { useAuth } from "@hooks/useAuth";
 import {
   Box,
   Typography,
@@ -11,11 +9,22 @@ import {
   Button,
   ListItemAvatar,
   Avatar,
+  Stack,
+  Chip,
+  ListItemSecondaryAction,
 } from "@mui/material";
+import { JSX } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { ROUTES_WITH_PARAMS } from "@constants/routes";
+import { useAuth } from "@hooks/useAuth";
 import { formatPrice } from "@utils/format";
 
-const Products = () => {
+import { useGetUserProducts } from "./hooks/useGetUserProducts";
+
+const Products = (): JSX.Element => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const {
     data: products,
     isLoading,
@@ -42,7 +51,7 @@ const Products = () => {
       </Button>
       <List>
         {products.map((product) => (
-          <ListItem key={product.id} divider>
+          <ListItem key={product.id} divider alignItems="flex-start">
             <ListItemAvatar>
               <Avatar
                 variant="rounded"
@@ -52,9 +61,43 @@ const Products = () => {
               />
             </ListItemAvatar>
             <ListItemText
-              primary={product.title}
-              secondary={`Prix : ${formatPrice(product.price)}`}
+              primary={
+                <Stack direction="row" alignItems="center" spacing={1}>
+                  <Typography variant="subtitle1">{product.title}</Typography>
+                  <Chip
+                    size="small"
+                    label={product.actif ? "Actif" : "Inactif"}
+                    color={product.actif ? "success" : "default"}
+                  />
+                </Stack>
+              }
+              secondary={
+                <>
+                  <Typography variant="body2">
+                    Prix : {formatPrice(product.price)}
+                  </Typography>
+                  <Typography variant="body2">
+                    Stock : {product.stock}
+                  </Typography>
+                  <Typography variant="body2">
+                    Catégorie : {product.categoryName ?? "N/A"}
+                  </Typography>
+                  <Typography variant="body2">
+                    Sous-catégorie : {product.subcategoryName ?? "N/A"}
+                  </Typography>
+                </>
+              }
             />
+            <ListItemSecondaryAction>
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  navigate(ROUTES_WITH_PARAMS({ id: product.id }).EDIT_PRODUCT)
+                }
+              >
+                Modifier
+              </Button>
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>

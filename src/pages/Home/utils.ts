@@ -4,7 +4,7 @@ export const buildProductSearchUrl = ({
   search,
   categoryId,
   subcategoryId,
-}: HOME_FILTERS) => {
+}: HOME_FILTERS): string => {
   const params = new URLSearchParams();
 
   params.set("actif", "true");

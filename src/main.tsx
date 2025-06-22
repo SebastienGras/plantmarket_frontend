@@ -5,10 +5,10 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import { AuthProvider } from "@contexts/AuthContext";
+import { SnackbarProvider } from "@contexts/SnackbarContext";
 
 import App from "./App";
 import theme from "./theme";
-import { SnackbarProvider } from "@contexts/SnackbarContext";
 
 const queryClient = new QueryClient();
 

@@ -1,8 +1,8 @@
+import { SelectChangeEvent } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import React, { JSX, useState } from "react";
 
 import SelectComponent from "./index";
-import { SelectChangeEvent } from "@mui/material";
-import React, { useState } from "react";
 
 const meta: Meta<typeof SelectComponent> = {
   title: "Components/SelectComponent",
@@ -24,10 +24,10 @@ const Template = ({
 }: Omit<
   React.ComponentProps<typeof SelectComponent>,
   "selected" | "handleChange"
->) => {
+>): JSX.Element => {
   const [selected, setSelected] = useState("");
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent): void => {
     setSelected(event.target.value);
   };
 

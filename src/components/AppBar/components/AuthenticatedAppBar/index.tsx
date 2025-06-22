@@ -1,8 +1,9 @@
+import { JSX } from "react";
+import { useNavigate } from "react-router-dom";
+
 import ButtonComponent from "@components/Button";
 import { AUTHENTICATED_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
-import { JSX } from "react";
-import { useNavigate } from "react-router-dom";
 
 const AuthenticatedAppBar = (): JSX.Element => {
   const { setUser } = useAuth();

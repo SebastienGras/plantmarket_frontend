@@ -6,10 +6,10 @@ export type PRODUCT = {
   stock: number;
   categoryId: string;
   subcategoryId: string;
-  sellerId: string;
+  sellerId?: string;
   actif: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export type PRODUCT_WITH_CATEGORY = PRODUCT & {
@@ -30,4 +30,20 @@ export type SUBCATEGORY = {
   name: string;
   slug: string;
   description: string;
+};
+
+export type USER = {
+  id: string;
+  token: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber?: string;
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  country?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  isSeller?: boolean;
 };

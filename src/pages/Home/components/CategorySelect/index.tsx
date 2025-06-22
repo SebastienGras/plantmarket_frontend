@@ -1,8 +1,10 @@
 import { SelectChangeEvent } from "@mui/material";
-import { useGetCategories } from "../../hooks/useGetCategories";
-import { useState } from "react";
-import { HOME_FILTERS } from "@pages/Home/constants";
+import { JSX, useState } from "react";
+
 import SelectComponent from "@components/Select";
+import { HOME_FILTERS } from "@pages/Home/constants";
+
+import { useGetCategories } from "../../hooks/useGetCategories";
 
 const CategorySelect = ({
   query,
@@ -10,11 +12,11 @@ const CategorySelect = ({
 }: {
   query: HOME_FILTERS;
   setQuery: (query: HOME_FILTERS) => void;
-}) => {
+}): JSX.Element => {
   const { data: categories, isLoading } = useGetCategories();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
-  const handleCategoryChange = (event: SelectChangeEvent) => {
+  const handleCategoryChange = (event: SelectChangeEvent): void => {
     setSelectedCategory(event.target.value);
     setQuery({ ...query, categoryId: event.target.value, subcategoryId: "" });
   };

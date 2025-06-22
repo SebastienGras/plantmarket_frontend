@@ -2,9 +2,9 @@ import { AppBar, Box, Toolbar } from "@mui/material";
 import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
+import ButtonComponent from "@components/Button";
 import { PUBLIC_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
-import ButtonComponent from "@components/Button";
 
 import AuthenticatedAppBar from "./AuthenticatedAppBar";
 import UnauthenticatedAppBar from "./UnauthenticatedAppBar";

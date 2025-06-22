@@ -9,13 +9,14 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { JSX, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { useDebounce } from "@hooks/useDebounce";
+import { formatPrice } from "@utils/format";
 
-import { HOME_TEXTS } from "./constants";
 import CategorySelect from "./components/CategorySelect";
 import SubcategorySelect from "./components/SubcategorySelect";
-import { formatPrice } from "@utils/format";
+import { HOME_TEXTS } from "./constants";
 import { useSearchProducts } from "./hooks/useSearchProducts";
 
 const Home = (): JSX.Element => {
@@ -63,7 +64,11 @@ const Home = (): JSX.Element => {
       <Grid container spacing={3}>
         {products?.map((product) => (
           <Grid key={product.id} size={6}>
-            <Card>
+            <Card
+              component={Link}
+              to={`/products/${product.id}`}
+              sx={{ textDecoration: "none" }}
+            >
               <CardMedia
                 component="img"
                 height="180"

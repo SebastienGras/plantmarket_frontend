@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const AddProductSchema = z.object({
+export const EditProductSchema = z.object({
   title: z.string().min(1, "Le titre est requis"),
   description: z.string().min(1, "La description est requise"),
   categoryId: z.string().min(1, "La catégorie est requise"),

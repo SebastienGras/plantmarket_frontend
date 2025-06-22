@@ -1,8 +1,9 @@
 import { Container, Box, TextField, Typography, Paper } from "@mui/material";
 import { JSX, useState } from "react";
 
-import { useLoginUser } from "./hooks";
 import ButtonComponent from "@components/Button";
+
+import { useLoginUser } from "./hooks";
 
 const Login = (): JSX.Element => {
   const { mutate: loginUser, isPending, error, data } = useLoginUser();
