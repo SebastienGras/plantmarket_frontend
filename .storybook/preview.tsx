@@ -1,5 +1,7 @@
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import type { Preview } from "@storybook/react-vite";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { JSX } from "react";
+
 import theme from "../src/theme";
 
 const preview: Preview = {
@@ -12,7 +14,7 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
+    (Story): JSX.Element => (
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Story />
