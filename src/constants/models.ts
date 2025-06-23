@@ -37,8 +37,8 @@ export type USER = {
   id: string;
   token: string;
   email: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   phoneNumber?: string;
   address?: string;
   city?: string;

@@ -94,8 +94,8 @@ const ProductPage = (): JSX.Element => {
             {user && (
               <>
                 <Typography variant="body2">
-                  <strong>Vendu par :</strong> {user.email} {user.firstName}{" "}
-                  {user.lastName}
+                  <strong>Vendu par :</strong> {user.email} {user.firstname}{" "}
+                  {user.lastname}
                 </Typography>
 
                 <SellerProducts
