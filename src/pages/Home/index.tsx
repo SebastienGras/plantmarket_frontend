@@ -63,7 +63,7 @@ const Home = (): JSX.Element => {
 
       <Grid container spacing={3}>
         {products?.map((product) => (
-          <Grid key={product.id} size={6}>
+          <Grid key={product.id} size={4}>
             <Card
               component={Link}
               to={`/products/${product.id}`}

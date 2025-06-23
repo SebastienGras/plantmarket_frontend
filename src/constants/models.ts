@@ -22,6 +22,7 @@ export type CATEGORY = {
   name: string;
   slug: string;
   description: string;
+  imageUrl: string;
 };
 
 export type SUBCATEGORY = {
