@@ -2,9 +2,8 @@ import { SelectChangeEvent } from "@mui/material";
 import { JSX, useState } from "react";
 
 import SelectComponent from "@components/Select";
+import { useGetCategories } from "@hooks/useGetCategories";
 import { HOME_FILTERS } from "@pages/Home/constants";
-
-import { useGetCategories } from "../../hooks/useGetCategories";
 
 const CategorySelect = ({
   query,

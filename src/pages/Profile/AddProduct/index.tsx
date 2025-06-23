@@ -8,9 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { JSX } from "react";
-import { Form, Field } from "react-final-form";
+import { Field, Form } from "react-final-form";
 
-import { useGetCategories } from "@pages/Home/hooks/useGetCategories";
+import { useGetCategories } from "@hooks/useGetCategories";
 import { useGetSubcategoriesByCategoryId } from "@pages/Home/hooks/useGetSubcategoriesByCategoryId";
 import { zodValidator } from "@utils/validator";
 
