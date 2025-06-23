@@ -44,7 +44,12 @@ const ProfilePage = (): JSX.Element => {
           />
         )}
         {selectedTab === "add" && <AddProduct />}
-        {selectedTab === "profile" && <EditProfile />}
+        {selectedTab === "profile" && (
+          <EditProfile
+            setSelectedTab={setSelectedTab}
+            productTab={"products" as ProfilePageTabs}
+          />
+        )}
         {selectedTab === "edit" && (
           <EditProductPage
             setSelectedTab={setSelectedTab}
