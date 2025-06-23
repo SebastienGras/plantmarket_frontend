@@ -1,30 +1,40 @@
 import {
   Box,
-  Typography,
-  CircularProgress,
-  Paper,
-  Divider,
   Button,
-  Grid,
   Chip,
+  CircularProgress,
+  Divider,
+  Grid,
+  Paper,
+  Typography,
 } from "@mui/material";
 import { JSX } from "react";
 import { useParams } from "react-router-dom";
 
+import { PriceComponent } from "@components/Typography/Price";
+import { useGetUserById } from "@hooks/useGetUserById";
+
 import { useGetProductById } from "../../hooks/useGetProductById";
+
+import SellerProducts from "./components/SellerProducts";
 
 const ProductPage = (): JSX.Element => {
   const { id: productId } = useParams();
-  const { data: product, isLoading, isError } = useGetProductById(productId!);
+  const {
+    data: product,
+    isLoading: isProductLoading,
+    isError: isProductError,
+  } = useGetProductById(productId!);
+  const { data: user } = useGetUserById(product?.sellerId);
 
-  if (isLoading)
+  if (isProductLoading)
     return (
       <Box display="flex" justifyContent="center" mt={4}>
         <CircularProgress />
       </Box>
     );
 
-  if (isError || !product)
+  if (isProductError || !product)
     return (
       <Box textAlign="center" mt={4}>
         <Typography variant="h6">Produit introuvable</Typography>
@@ -49,9 +59,11 @@ const ProductPage = (): JSX.Element => {
               {product.title}
             </Typography>
 
-            <Typography variant="h5" color="primary" gutterBottom>
-              {product.price} €
-            </Typography>
+            <PriceComponent
+              price={product.price}
+              variant="h5"
+              color="primary"
+            />
 
             <Chip
               label={product.stock > 0 ? "Disponible" : "Indisponible"}
@@ -79,13 +91,27 @@ const ProductPage = (): JSX.Element => {
               <strong>Stock disponible :</strong> {product.stock}
             </Typography>
 
+            {user && (
+              <>
+                <Typography variant="body2">
+                  <strong>Vendu par :</strong> {user.email} {user.firstName}{" "}
+                  {user.lastName}
+                </Typography>
+
+                <SellerProducts
+                  sellerId={product.sellerId!}
+                  excludeProductId={product.id}
+                />
+              </>
+            )}
+
             <Button
               variant="contained"
               color="primary"
               sx={{ mt: 3 }}
               fullWidth
             >
-              Contacter le vendeur
+              Contacter le vendeur {product.sellerId || "N/A"}
             </Button>
           </Grid>
         </Grid>

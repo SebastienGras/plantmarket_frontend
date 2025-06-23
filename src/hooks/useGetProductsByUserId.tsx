@@ -5,7 +5,7 @@ import { QUERY_KEYS } from "@constants/queryKeys";
 import { TIME } from "@constants/time";
 import { api } from "@services/axios";
 
-export const useGetUserProducts = (
+export const useGetProductsByUserId = (
   userId: string
 ): UseQueryResult<PRODUCT_WITH_CATEGORY[], Error> =>
   useQuery({
