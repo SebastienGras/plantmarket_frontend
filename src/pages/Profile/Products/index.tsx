@@ -1,24 +1,23 @@
 import {
+  Alert,
+  Avatar,
   Box,
-  Typography,
+  Button,
+  Chip,
+  CircularProgress,
   List,
   ListItem,
-  ListItemText,
-  CircularProgress,
-  Alert,
-  Button,
   ListItemAvatar,
-  Avatar,
-  Stack,
-  Chip,
   ListItemSecondaryAction,
+  ListItemText,
+  Stack,
+  Typography,
 } from "@mui/material";
 import { JSX } from "react";
 
 import { useAuth } from "@hooks/useAuth";
+import { useGetProductsByUserId } from "@hooks/useGetProductsByUserId";
 import { formatPrice } from "@utils/format";
-
-import { useGetUserProducts } from "./hooks/useGetUserProducts";
 
 type ProductsProps<T extends string> = {
   editTab: T;
@@ -37,7 +36,7 @@ const Products = <T extends string>({
     isLoading,
     error,
     refetch,
-  } = useGetUserProducts(user!.id);
+  } = useGetProductsByUserId(user!.id);
 
   if (isLoading) return <CircularProgress />;
   if (error)
