@@ -1,7 +1,8 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { JSX } from "react";
-import { Field, Form } from "react-final-form";
+import { Form } from "react-final-form";
 
+import TextFieldComponent from "@components/Form/TextField";
 import { USER } from "@constants/models";
 import { zodValidator } from "@utils/validator";
 
@@ -27,7 +28,6 @@ const EditUserForm = <T extends string>({
   });
 
   const onSubmit = (values: any): void => {
-    console.log("Form values:", values);
     updateUser({
       id: user.id,
       firstname: values.firstname,
@@ -46,49 +46,12 @@ const EditUserForm = <T extends string>({
         onSubmit={onSubmit}
         initialValues={user}
         validate={zodValidator(EditUserSchema)}
-        render={({ handleSubmit, submitting, values, errors }) => {
+        render={({ handleSubmit, submitting }) => {
           return (
             <form onSubmit={handleSubmit}>
-              <Field name="firstname">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Prénom"
-                    fullWidth
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
-
-              <Field name="lastname">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Nom"
-                    fullWidth
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
-
-              <Field name="email">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Email"
-                    fullWidth
-                    type="email"
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
-
+              <TextFieldComponent name="firstname" label="Prénom" />
+              <TextFieldComponent name="lastname" label="Nom" />
+              <TextFieldComponent name="email" label="Email" type="email" />
               <Button
                 type="submit"
                 variant="contained"
