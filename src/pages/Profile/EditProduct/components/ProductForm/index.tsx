@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Checkbox,
   FormControlLabel,
   MenuItem,
@@ -9,6 +8,7 @@ import {
 import { JSX } from "react";
 import { Field, Form } from "react-final-form";
 
+import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
 import { PRODUCT } from "@constants/models";
 import { useGetCategories } from "@hooks/useGetCategories";
@@ -111,15 +111,11 @@ const EditProductForm = <T extends string>({
                 )}
               </Field>
 
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
+              <SubmitButton
+                label="Mettre à jour"
+                pendingLabel="Mise à jour en cours..."
                 disabled={submitting || isPending}
-                sx={{ mt: 2 }}
-              >
-                {isPending ? "Mise à jour en cours..." : "Mettre à jour"}
-              </Button>
+              />
             </form>
           );
         }}

@@ -2,7 +2,7 @@ import { Alert, Box, Container, Paper, Typography } from "@mui/material";
 import { JSX } from "react";
 import { Form } from "react-final-form";
 
-import ButtonComponent from "@components/Button";
+import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
 
 import { useRegister } from "./hooks/useRegister";
@@ -50,10 +50,10 @@ const Register = (): JSX.Element => {
                   </Alert>
                 )}
 
-                <ButtonComponent
-                  text={isPending ? "Création..." : "S'inscrire"}
-                  type="submit"
+                <SubmitButton
+                  label="S'inscrire"
                   disabled={isPending}
+                  pendingLabel="Création en cours..."
                 />
               </form>
             )}

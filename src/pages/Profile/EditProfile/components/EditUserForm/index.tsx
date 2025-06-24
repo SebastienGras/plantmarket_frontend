@@ -1,7 +1,8 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { JSX } from "react";
 import { Form } from "react-final-form";
 
+import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
 import { USER } from "@constants/models";
 import { zodValidator } from "@utils/validator";
@@ -52,15 +53,11 @@ const EditUserForm = <T extends string>({
               <TextFieldComponent name="firstname" label="Prénom" />
               <TextFieldComponent name="lastname" label="Nom" />
               <TextFieldComponent name="email" label="Email" type="email" />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
+              <SubmitButton
+                label="Mettre à jour"
                 disabled={submitting || isPending}
-                sx={{ mt: 2 }}
-              >
-                {isPending ? "Mise à jour en cours..." : "Mettre à jour"}
-              </Button>
+                pendingLabel="Mise à jour en cours..."
+              />
             </form>
           );
         }}

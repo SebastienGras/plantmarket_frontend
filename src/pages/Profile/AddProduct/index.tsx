@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Checkbox,
   FormControlLabel,
   MenuItem,
@@ -9,6 +8,7 @@ import {
 import { JSX } from "react";
 import { Field, Form } from "react-final-form";
 
+import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
 import { useGetCategories } from "@hooks/useGetCategories";
 import { useGetSubcategoriesByCategoryId } from "@pages/Home/hooks/useGetSubcategoriesByCategoryId";
@@ -98,15 +98,11 @@ const AddProduct = (): JSX.Element => {
                 )}
               </Field>
 
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
+              <SubmitButton
                 disabled={submitting || isPending}
-                sx={{ mt: 2 }}
-              >
-                {isPending ? "Ajout en cours..." : "Ajouter le produit"}
-              </Button>
+                label="Ajouter le produit"
+                pendingLabel="Ajout en cours..."
+              />
             </form>
           );
         }}
