@@ -10,6 +10,9 @@ import { SnackbarProvider } from "@contexts/SnackbarContext";
 import App from "./App";
 import theme from "./theme";
 
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(

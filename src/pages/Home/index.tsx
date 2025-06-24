@@ -15,6 +15,7 @@ import { PageTitle } from "@components/Typography/PageTitle";
 import { useDebounce } from "@hooks/useDebounce";
 import { formatPrice } from "@utils/format";
 
+import CategoryCarousel from "./components/CategoryCarousel";
 import CategorySelect from "./components/CategorySelect";
 import SubcategorySelect from "./components/SubcategorySelect";
 import { HOME_FILTERS, HOME_TEXTS } from "./constants";
@@ -87,6 +88,7 @@ const Home = (): JSX.Element => {
           </Grid>
         ))}
       </Grid>
+      <CategoryCarousel />
     </Box>
   );
 };
