@@ -1,15 +1,10 @@
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Box, Checkbox, FormControlLabel, MenuItem } from "@mui/material";
 import { JSX } from "react";
 import { Field, Form } from "react-final-form";
 
 import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
+import { PageTitle } from "@components/Typography/PageTitle";
 import { useGetCategories } from "@hooks/useGetCategories";
 import { useGetSubcategoriesByCategoryId } from "@pages/Home/hooks/useGetSubcategoriesByCategoryId";
 import { zodValidator } from "@utils/validator";
@@ -35,9 +30,7 @@ const AddProduct = (): JSX.Element => {
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Ajouter un produit
-      </Typography>
+      <PageTitle text="Ajouter un produit" />
 
       <Form
         onSubmit={onSubmit}

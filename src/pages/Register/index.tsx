@@ -1,9 +1,10 @@
-import { Alert, Box, Container, Paper, Typography } from "@mui/material";
+import { Alert, Box, Container, Paper } from "@mui/material";
 import { JSX } from "react";
 import { Form } from "react-final-form";
 
 import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
+import { PageTitle } from "@components/Typography/PageTitle";
 
 import { useRegister } from "./hooks/useRegister";
 
@@ -21,9 +22,7 @@ const Register = (): JSX.Element => {
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography variant="h5" component="h1" gutterBottom>
-          Créer un compte
-        </Typography>
+        <PageTitle text="Inscription" />
 
         <Box display="flex" flexDirection="column" gap={2}>
           <Form

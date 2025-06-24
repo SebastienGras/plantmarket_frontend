@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { JSX } from "react";
 
+import { PageTitle } from "@components/Typography/PageTitle";
 import { useAuth } from "@hooks/useAuth";
 import { useGetProductsByUserId } from "@hooks/useGetProductsByUserId";
 import { formatPrice } from "@utils/format";
@@ -49,9 +50,8 @@ const Products = <T extends string>({
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Mes produits ({products.length})
-      </Typography>
+      <PageTitle text="Mes produits" />
+
       <Button variant="outlined" onClick={() => refetch()} sx={{ mb: 2 }}>
         Rafraîchir
       </Button>

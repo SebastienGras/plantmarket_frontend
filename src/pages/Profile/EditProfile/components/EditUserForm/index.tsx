@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { JSX } from "react";
 import { Form } from "react-final-form";
 
 import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
+import { PageTitle } from "@components/Typography/PageTitle";
 import { USER } from "@constants/models";
 import { zodValidator } from "@utils/validator";
 
@@ -39,9 +40,7 @@ const EditUserForm = <T extends string>({
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Modifier utilisateur
-      </Typography>
+      <PageTitle text="Modifier l'utilisateur" />
 
       <Form
         onSubmit={onSubmit}

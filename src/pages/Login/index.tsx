@@ -2,6 +2,7 @@ import { Box, Container, Paper, TextField, Typography } from "@mui/material";
 import { JSX, useState } from "react";
 
 import SubmitButton from "@components/Form/SubmitButton";
+import { PageTitle } from "@components/Typography/PageTitle";
 
 import { useLoginUser } from "./hooks";
 
@@ -18,9 +19,7 @@ const Login = (): JSX.Element => {
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography variant="h5" component="h1" gutterBottom>
-          Connection
-        </Typography>
+        <PageTitle text="Connexion" />
         <Box
           component="form"
           onSubmit={handleSubmit}

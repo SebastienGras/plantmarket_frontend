@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid";
 import { JSX, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { PageTitle } from "@components/Typography/PageTitle";
 import { useDebounce } from "@hooks/useDebounce";
 import { formatPrice } from "@utils/format";
 
@@ -35,9 +36,7 @@ const Home = (): JSX.Element => {
 
   return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h4" gutterBottom color="primary">
-        {HOME_TEXTS.RESEARCH}
-      </Typography>
+      <PageTitle text={HOME_TEXTS.RESEARCH} />
 
       <Box display="flex" gap={2} mb={4} justifyContent="space-between">
         <TextField

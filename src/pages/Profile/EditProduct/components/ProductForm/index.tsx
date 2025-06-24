@@ -1,15 +1,10 @@
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Box, Checkbox, FormControlLabel, MenuItem } from "@mui/material";
 import { JSX } from "react";
 import { Field, Form } from "react-final-form";
 
 import SubmitButton from "@components/Form/SubmitButton";
 import TextFieldComponent from "@components/Form/TextField";
+import { PageTitle } from "@components/Typography/PageTitle";
 import { PRODUCT } from "@constants/models";
 import { useGetCategories } from "@hooks/useGetCategories";
 import { useGetSubcategoriesByCategoryId } from "@pages/Home/hooks/useGetSubcategoriesByCategoryId";
@@ -53,9 +48,7 @@ const EditProductForm = <T extends string>({
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Modifier le produit
-      </Typography>
+      <PageTitle text="Modifier un produit" />
 
       <Form
         onSubmit={onSubmit}

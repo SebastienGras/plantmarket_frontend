@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { PriceComponent } from "./index";
 
 const meta: Meta<typeof PriceComponent> = {
-  title: "Components/PriceComponent",
+  title: "Components/Typography/PriceComponent",
   component: PriceComponent,
   tags: ["autodocs"],
   argTypes: {
