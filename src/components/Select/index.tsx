@@ -1,11 +1,11 @@
 import {
   Box,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
-  CircularProgress,
 } from "@mui/material";
 import { JSX } from "react";
 
@@ -15,6 +15,7 @@ type SelectComponentProps = {
   datas: { id: string; name: string }[] | undefined;
   isLoading: boolean;
   selected: string;
+  disabled?: boolean;
   variant?: "outlined" | "filled" | "standard";
   fullWidth?: boolean;
   displayAllOption?: boolean;
@@ -28,6 +29,7 @@ const SelectComponent = ({
   selected,
   handleChange,
   variant = "outlined",
+  disabled = false,
   fullWidth = true,
   displayAllOption = true,
   allLabel = "Toutes",
@@ -37,17 +39,14 @@ const SelectComponent = ({
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <FormControl
-          fullWidth={fullWidth}
-          variant={variant}
-          sx={{ maxWidth: 300 }}
-        >
+        <FormControl fullWidth={fullWidth} variant={variant}>
           <InputLabel id={`${label}-label`}>{label}</InputLabel>
           <Select
             labelId={`${label}-label`}
             value={selected}
             label={label}
             onChange={handleChange}
+            disabled={disabled}
           >
             {displayAllOption && (
               <MenuItem value="">

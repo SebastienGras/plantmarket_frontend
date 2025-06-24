@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControlLabel, MenuItem } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, Grid, MenuItem } from "@mui/material";
 import { JSX } from "react";
 import { Field, Form } from "react-final-form";
 
@@ -41,61 +41,75 @@ const AddProduct = (): JSX.Element => {
             useGetSubcategoriesByCategoryId(values.categoryId);
           return (
             <form onSubmit={handleSubmit}>
-              <TextFieldComponent name="title" label="Titre" />
-
-              <TextFieldComponent
-                name="description"
-                label="Description"
-                multiline
-              />
-
-              {categories?.length && (
-                <TextFieldComponent
-                  name="categoryId"
-                  label="Catégorie"
-                  isSelect
-                >
-                  {categories.map((cat) => (
-                    <MenuItem key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </MenuItem>
-                  ))}
-                </TextFieldComponent>
-              )}
-              {subcategories?.length && (
-                <TextFieldComponent
-                  name="subcategoryId"
-                  label="Sous-catégorie"
-                  isSelect
-                >
-                  {subcategories
-                    .filter((sub) => sub.categoryId === values.categoryId)
-                    .map((sub) => (
-                      <MenuItem key={sub.id} value={sub.id}>
-                        {sub.name}
+              <Grid container spacing={2} mb={4}>
+                <Grid size={{ xs: 12 }}>
+                  <TextFieldComponent name="title" label="Titre" />
+                </Grid>
+                <Grid size={{ xs: 12 }}>
+                  <TextFieldComponent
+                    name="description"
+                    label="Description"
+                    multiline
+                  />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextFieldComponent
+                    name="categoryId"
+                    label="Catégorie"
+                    isSelect
+                  >
+                    {categories?.map((cat) => (
+                      <MenuItem key={cat.id} value={cat.id}>
+                        {cat.name}
                       </MenuItem>
                     ))}
-                </TextFieldComponent>
-              )}
-
-              <TextFieldComponent name="price" label="Prix" type="number" />
-              <TextFieldComponent name="stock" label="Stock" type="number" />
-
-              <Field name="actif" type="checkbox">
-                {({ input }) => (
-                  <FormControlLabel
-                    {...input}
-                    control={<Checkbox {...input} checked={input.value} />}
-                    label="Produit actif"
+                  </TextFieldComponent>
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextFieldComponent
+                    name="subcategoryId"
+                    label="Sous-catégorie"
+                    disabled={!subcategories?.length}
+                    isSelect
+                  >
+                    {subcategories
+                      ?.filter((sub) => sub.categoryId === values.categoryId)
+                      .map((sub) => (
+                        <MenuItem key={sub.id} value={sub.id}>
+                          {sub.name}
+                        </MenuItem>
+                      ))}
+                  </TextFieldComponent>
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextFieldComponent name="price" label="Prix" type="number" />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextFieldComponent
+                    name="stock"
+                    label="Stock"
+                    type="number"
                   />
-                )}
-              </Field>
-
-              <SubmitButton
-                disabled={submitting || isPending}
-                label="Ajouter le produit"
-                pendingLabel="Ajout en cours..."
-              />
+                </Grid>
+                <Grid size={{ xs: 6 }}>
+                  <Field name="actif" type="checkbox">
+                    {({ input }) => (
+                      <FormControlLabel
+                        {...input}
+                        control={<Checkbox {...input} checked={input.value} />}
+                        label="Produit actif"
+                      />
+                    )}
+                  </Field>
+                </Grid>
+                <Grid size={{ xs: 6 }}>
+                  <SubmitButton
+                    disabled={submitting || isPending}
+                    label="Ajouter le produit"
+                    pendingLabel="Ajout en cours..."
+                  />
+                </Grid>
+              </Grid>
             </form>
           );
         }}

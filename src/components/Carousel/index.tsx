@@ -31,6 +31,12 @@ const Carousel = <T extends { id: string }>({
     <Box
       sx={{
         px: 4,
+        width: "100%",
+        maxWidth: "100%",
+        overflow: "hidden",
+        ".slick-slide > div": {
+          display: "block !important",
+        },
         ".slick-slide": {
           padding: theme.spacing(1),
         },

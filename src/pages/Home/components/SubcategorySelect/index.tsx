@@ -10,9 +10,11 @@ const SubcategorySelect = ({
   categoryId,
   query,
   setQuery,
+  disabled,
 }: {
-  categoryId: string;
+  categoryId?: string | undefined;
   query: HOME_FILTERS;
+  disabled: boolean;
   setQuery: (query: HOME_FILTERS) => void;
 }): JSX.Element => {
   const { data: subcategories, isLoading } =
@@ -29,6 +31,7 @@ const SubcategorySelect = ({
       datas={subcategories}
       isLoading={isLoading}
       selected={query.subcategoryId || ""}
+      disabled={disabled}
     />
   );
 };

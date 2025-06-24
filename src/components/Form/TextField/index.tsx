@@ -8,12 +8,14 @@ const TextFieldComponent = ({
   type = "text",
   multiline = false,
   isSelect = false,
+  disabled = false,
   children = <></>,
 }: {
   name: string;
   label: string;
   type?: string;
   isSelect?: boolean;
+  disabled?: boolean;
   multiline?: boolean;
   children?: JSX.Element | JSX.Element[] | undefined;
 }): JSX.Element => {
@@ -25,6 +27,7 @@ const TextFieldComponent = ({
           type={type}
           label={label}
           select={isSelect}
+          disabled={disabled}
           multiline={multiline}
           rows={multiline ? 4 : 1}
           fullWidth
