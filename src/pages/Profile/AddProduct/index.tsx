@@ -1,15 +1,10 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Checkbox, FormControlLabel, MenuItem } from "@mui/material";
 import { JSX } from "react";
 import { Field, Form } from "react-final-form";
 
+import SubmitButton from "@components/Form/SubmitButton";
+import TextFieldComponent from "@components/Form/TextField";
+import { PageTitle } from "@components/Typography/PageTitle";
 import { useGetCategories } from "@hooks/useGetCategories";
 import { useGetSubcategoriesByCategoryId } from "@pages/Home/hooks/useGetSubcategoriesByCategoryId";
 import { zodValidator } from "@utils/validator";
@@ -35,9 +30,7 @@ const AddProduct = (): JSX.Element => {
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Ajouter un produit
-      </Typography>
+      <PageTitle text="Ajouter un produit" />
 
       <Form
         onSubmit={onSubmit}
@@ -48,106 +41,45 @@ const AddProduct = (): JSX.Element => {
             useGetSubcategoriesByCategoryId(values.categoryId);
           return (
             <form onSubmit={handleSubmit}>
-              <Field name="title">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Titre"
-                    fullWidth
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
+              <TextFieldComponent name="title" label="Titre" />
 
-              <Field name="description">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Description"
-                    fullWidth
-                    multiline
-                    rows={3}
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
+              <TextFieldComponent
+                name="description"
+                label="Description"
+                multiline
+              />
 
               {categories?.length && (
-                <Field name="categoryId">
-                  {({ input, meta }) => (
-                    <TextField
-                      {...input}
-                      select
-                      label="Catégorie"
-                      fullWidth
-                      margin="normal"
-                      error={meta.touched && meta.error}
-                      helperText={meta.touched && meta.error}
-                    >
-                      {categories.map((cat) => (
-                        <MenuItem key={cat.id} value={cat.id}>
-                          {cat.name}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  )}
-                </Field>
+                <TextFieldComponent
+                  name="categoryId"
+                  label="Catégorie"
+                  isSelect
+                >
+                  {categories.map((cat) => (
+                    <MenuItem key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </MenuItem>
+                  ))}
+                </TextFieldComponent>
               )}
               {subcategories?.length && (
-                <Field name="subcategoryId">
-                  {({ input, meta }) => (
-                    <TextField
-                      {...input}
-                      select
-                      label="Sous-catégorie"
-                      fullWidth
-                      margin="normal"
-                      error={meta.touched && meta.error}
-                      helperText={meta.touched && meta.error}
-                    >
-                      {subcategories
-                        .filter((sub) => sub.categoryId === values.categoryId)
-                        .map((sub) => (
-                          <MenuItem key={sub.id} value={sub.id}>
-                            {sub.name}
-                          </MenuItem>
-                        ))}
-                    </TextField>
-                  )}
-                </Field>
+                <TextFieldComponent
+                  name="subcategoryId"
+                  label="Sous-catégorie"
+                  isSelect
+                >
+                  {subcategories
+                    .filter((sub) => sub.categoryId === values.categoryId)
+                    .map((sub) => (
+                      <MenuItem key={sub.id} value={sub.id}>
+                        {sub.name}
+                      </MenuItem>
+                    ))}
+                </TextFieldComponent>
               )}
 
-              <Field name="price">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    type="number"
-                    label="Prix"
-                    fullWidth
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
-
-              <Field name="stock">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    type="number"
-                    label="Stock"
-                    fullWidth
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
+              <TextFieldComponent name="price" label="Prix" type="number" />
+              <TextFieldComponent name="stock" label="Stock" type="number" />
 
               <Field name="actif" type="checkbox">
                 {({ input }) => (
@@ -159,15 +91,11 @@ const AddProduct = (): JSX.Element => {
                 )}
               </Field>
 
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
+              <SubmitButton
                 disabled={submitting || isPending}
-                sx={{ mt: 2 }}
-              >
-                {isPending ? "Ajout en cours..." : "Ajouter le produit"}
-              </Button>
+                label="Ajouter le produit"
+                pendingLabel="Ajout en cours..."
+              />
             </form>
           );
         }}

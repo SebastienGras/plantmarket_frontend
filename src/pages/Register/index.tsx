@@ -1,15 +1,10 @@
-import {
-  Container,
-  TextField,
-  Typography,
-  Paper,
-  Alert,
-  Box,
-} from "@mui/material";
+import { Alert, Box, Container, Paper } from "@mui/material";
 import { JSX } from "react";
-import { Form, Field } from "react-final-form";
+import { Form } from "react-final-form";
 
-import ButtonComponent from "@components/Button";
+import SubmitButton from "@components/Form/SubmitButton";
+import TextFieldComponent from "@components/Form/TextField";
+import { PageTitle } from "@components/Typography/PageTitle";
 
 import { useRegister } from "./hooks/useRegister";
 
@@ -27,55 +22,26 @@ const Register = (): JSX.Element => {
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography variant="h5" component="h1" gutterBottom>
-          Créer un compte
-        </Typography>
+        <PageTitle text="Inscription" />
 
         <Box display="flex" flexDirection="column" gap={2}>
           <Form
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
               <form onSubmit={handleSubmit}>
-                <Field name="email">
-                  {({ input, meta }) => (
-                    <TextField
-                      label="Email"
-                      type="email"
-                      fullWidth
-                      margin="normal"
-                      {...input}
-                      error={meta.touched && meta.error}
-                      helperText={meta.touched && meta.error}
-                    />
-                  )}
-                </Field>
+                <TextFieldComponent name="email" label="Email" type="email" />
 
-                <Field name="password">
-                  {({ input, meta }) => (
-                    <TextField
-                      label="Mot de passe"
-                      type="password"
-                      fullWidth
-                      margin="normal"
-                      {...input}
-                      error={meta.touched && meta.error}
-                      helperText={meta.touched && meta.error}
-                    />
-                  )}
-                </Field>
-                <Field name="confirmPassword">
-                  {({ input, meta }) => (
-                    <TextField
-                      label="Confirmation du Mot de passe"
-                      type="password"
-                      fullWidth
-                      margin="normal"
-                      {...input}
-                      error={meta.touched && meta.error}
-                      helperText={meta.touched && meta.error}
-                    />
-                  )}
-                </Field>
+                <TextFieldComponent
+                  name="password"
+                  label="Mot de passe"
+                  type="password"
+                />
+
+                <TextFieldComponent
+                  name="confirmPassword"
+                  label="Confirmation du Mot de passe"
+                  type="password"
+                />
 
                 {error && (
                   <Alert severity="error" sx={{ mt: 2 }}>
@@ -83,10 +49,10 @@ const Register = (): JSX.Element => {
                   </Alert>
                 )}
 
-                <ButtonComponent
-                  text={isPending ? "Création..." : "S'inscrire"}
-                  type="submit"
+                <SubmitButton
+                  label="S'inscrire"
                   disabled={isPending}
+                  pendingLabel="Création en cours..."
                 />
               </form>
             )}

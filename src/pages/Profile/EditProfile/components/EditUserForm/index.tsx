@@ -1,7 +1,10 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { JSX } from "react";
-import { Field, Form } from "react-final-form";
+import { Form } from "react-final-form";
 
+import SubmitButton from "@components/Form/SubmitButton";
+import TextFieldComponent from "@components/Form/TextField";
+import { PageTitle } from "@components/Typography/PageTitle";
 import { USER } from "@constants/models";
 import { zodValidator } from "@utils/validator";
 
@@ -27,7 +30,6 @@ const EditUserForm = <T extends string>({
   });
 
   const onSubmit = (values: any): void => {
-    console.log("Form values:", values);
     updateUser({
       id: user.id,
       firstname: values.firstname,
@@ -38,66 +40,23 @@ const EditUserForm = <T extends string>({
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Modifier utilisateur
-      </Typography>
+      <PageTitle text="Modifier l'utilisateur" />
 
       <Form
         onSubmit={onSubmit}
         initialValues={user}
         validate={zodValidator(EditUserSchema)}
-        render={({ handleSubmit, submitting, values, errors }) => {
+        render={({ handleSubmit, submitting }) => {
           return (
             <form onSubmit={handleSubmit}>
-              <Field name="firstname">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Prénom"
-                    fullWidth
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
-
-              <Field name="lastname">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Nom"
-                    fullWidth
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
-
-              <Field name="email">
-                {({ input, meta }) => (
-                  <TextField
-                    {...input}
-                    label="Email"
-                    fullWidth
-                    type="email"
-                    margin="normal"
-                    error={meta.touched && meta.error}
-                    helperText={meta.touched && meta.error}
-                  />
-                )}
-              </Field>
-
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
+              <TextFieldComponent name="firstname" label="Prénom" />
+              <TextFieldComponent name="lastname" label="Nom" />
+              <TextFieldComponent name="email" label="Email" type="email" />
+              <SubmitButton
+                label="Mettre à jour"
                 disabled={submitting || isPending}
-                sx={{ mt: 2 }}
-              >
-                {isPending ? "Mise à jour en cours..." : "Mettre à jour"}
-              </Button>
+                pendingLabel="Mise à jour en cours..."
+              />
             </form>
           );
         }}

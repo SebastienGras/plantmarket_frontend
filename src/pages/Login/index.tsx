@@ -1,7 +1,8 @@
-import { Container, Box, TextField, Typography, Paper } from "@mui/material";
+import { Box, Container, Paper, TextField, Typography } from "@mui/material";
 import { JSX, useState } from "react";
 
-import ButtonComponent from "@components/Button";
+import SubmitButton from "@components/Form/SubmitButton";
+import { PageTitle } from "@components/Typography/PageTitle";
 
 import { useLoginUser } from "./hooks";
 
@@ -18,9 +19,7 @@ const Login = (): JSX.Element => {
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography variant="h5" component="h1" gutterBottom>
-          Login
-        </Typography>
+        <PageTitle text="Connexion" />
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -44,8 +43,11 @@ const Login = (): JSX.Element => {
             required
             fullWidth
           />
-          <ButtonComponent text="Login" type="submit" />
-          {isPending && <Typography>Loading...</Typography>}
+          <SubmitButton
+            label="Connection"
+            pendingLabel="Connection en cour ..."
+          />
+          {isPending && <Typography>Chargement...</Typography>}
           {error && (
             <Typography color="error">
               Error:{" "}
@@ -54,7 +56,7 @@ const Login = (): JSX.Element => {
           )}
           {data && (
             <Typography color="success.main">
-              Login successful! Welcome, {data.token}!
+              Connection réussie ! Bienvenue, {data.token}!
             </Typography>
           )}
         </Box>
