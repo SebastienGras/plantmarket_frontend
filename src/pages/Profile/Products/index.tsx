@@ -17,6 +17,7 @@ import { JSX } from "react";
 
 import { PageTitle } from "@components/Typography/PageTitle";
 import { useAuth } from "@hooks/useAuth";
+import { useConfirmModal } from "@hooks/useConfirmModal";
 import { useGetProductsByUserId } from "@hooks/useGetProductsByUserId";
 import { formatPrice } from "@utils/format";
 
@@ -40,6 +41,7 @@ const Products = ({
   } = useGetProductsByUserId(user!.id);
 
   const { mutate: deleteProduct } = useDeleteProduct();
+  const confirm = useConfirmModal();
 
   if (isLoading) return <CircularProgress />;
   if (error)
@@ -111,7 +113,12 @@ const Products = ({
                   variant="outlined"
                   color="error"
                   onClick={() => {
-                    deleteProduct(product.id);
+                    confirm({
+                      title: "Supprimer le produit",
+                      content: "Es-tu sûr de vouloir supprimer le produit ?",
+                      confirmLabel: "Supprimer",
+                      onConfirm: () => deleteProduct(product.id),
+                    });
                   }}
                 >
                   Supprimer
