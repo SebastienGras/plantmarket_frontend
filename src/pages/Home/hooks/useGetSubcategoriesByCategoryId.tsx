@@ -6,7 +6,7 @@ import { TIME } from "@constants/time";
 import { api } from "@services/axios";
 
 export const useGetSubcategoriesByCategoryId = (
-  categoryId: string
+  categoryId?: string
 ): UseQueryResult<SUBCATEGORY[], Error> =>
   useQuery<SUBCATEGORY[]>({
     queryKey: [QUERY_KEYS.SUBCATEGORIES_BY_CATEGORY_ID, categoryId],

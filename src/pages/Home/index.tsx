@@ -39,22 +39,28 @@ const Home = (): JSX.Element => {
     <Box sx={{ p: 4 }}>
       <PageTitle text={HOME_TEXTS.RESEARCH} />
 
-      <Box display="flex" gap={2} mb={4} justifyContent="space-between">
-        <TextField
-          label={HOME_TEXTS.PLANT_NAME}
-          variant="outlined"
-          value={query.search}
-          onChange={(e) => setQuery({ ...query, search: e.target.value })}
-        />
-        <CategorySelect setQuery={setQuery} query={query} />
-        {query.categoryId && (
+      <Grid container spacing={2} mb={4}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <TextField
+            label={HOME_TEXTS.PLANT_NAME}
+            variant="outlined"
+            fullWidth
+            value={query.search}
+            onChange={(e) => setQuery({ ...query, search: e.target.value })}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, md: 3 }}>
+          <CategorySelect setQuery={setQuery} query={query} />
+        </Grid>
+        <Grid size={{ xs: 12, md: 3 }}>
           <SubcategorySelect
             categoryId={query.categoryId}
             setQuery={setQuery}
             query={query}
+            disabled={!query.categoryId}
           />
-        )}
-      </Box>
+        </Grid>
+      </Grid>
 
       {isProductsLoading && <CircularProgress />}
       {productsError && (
@@ -63,7 +69,7 @@ const Home = (): JSX.Element => {
 
       <Grid container spacing={3}>
         {products?.map((product) => (
-          <Grid key={product.id} size={4}>
+          <Grid key={product.id} size={{ md: 4, xs: 12 }}>
             <Card
               component={Link}
               to={`/products/${product.id}`}

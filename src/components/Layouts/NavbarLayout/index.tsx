@@ -1,10 +1,10 @@
 import {
+  Divider,
   List,
   ListItemButton,
   ListItemText,
-  Typography,
-  Divider,
   Paper,
+  Typography,
 } from "@mui/material";
 import { JSX } from "react";
 

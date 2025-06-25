@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { JSX } from "react";
 import { Form } from "react-final-form";
 
@@ -49,9 +49,17 @@ const EditUserForm = <T extends string>({
         render={({ handleSubmit, submitting }) => {
           return (
             <form onSubmit={handleSubmit}>
-              <TextFieldComponent name="firstname" label="Prénom" />
-              <TextFieldComponent name="lastname" label="Nom" />
-              <TextFieldComponent name="email" label="Email" type="email" />
+              <Grid container spacing={2} mb={4}>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextFieldComponent name="firstname" label="Prénom" />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextFieldComponent name="lastname" label="Nom" />
+                </Grid>
+                <Grid size={{ xs: 12 }}>
+                  <TextFieldComponent name="email" label="Email" type="email" />
+                </Grid>
+              </Grid>
               <SubmitButton
                 label="Mettre à jour"
                 disabled={submitting || isPending}

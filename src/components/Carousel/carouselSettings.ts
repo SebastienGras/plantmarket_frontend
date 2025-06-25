@@ -3,6 +3,7 @@ export const settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 3,
+  innerHeight: 100,
   slidesToScroll: 1,
   swipeToSlide: true,
   draggable: true,
