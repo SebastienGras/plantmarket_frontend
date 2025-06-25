@@ -20,6 +20,8 @@ import { useAuth } from "@hooks/useAuth";
 import { useGetProductsByUserId } from "@hooks/useGetProductsByUserId";
 import { formatPrice } from "@utils/format";
 
+import { useDeleteProduct } from "./hooks/useDeleteProduct";
+
 type ProductsProps = {
   setSelectedTab: () => void;
   setProductId: (id: string) => void;
@@ -36,6 +38,8 @@ const Products = ({
     error,
     refetch,
   } = useGetProductsByUserId(user!.id);
+
+  const { mutate: deleteProduct } = useDeleteProduct();
 
   if (isLoading) return <CircularProgress />;
   if (error)
@@ -93,15 +97,26 @@ const Products = ({
               }
             />
             <ListItemSecondaryAction>
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  setProductId(product.id);
-                  setSelectedTab();
-                }}
-              >
-                Modifier
-              </Button>
+              <Stack spacing={1}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    setProductId(product.id);
+                    setSelectedTab();
+                  }}
+                >
+                  Modifier
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => {
+                    deleteProduct(product.id);
+                  }}
+                >
+                  Supprimer
+                </Button>
+              </Stack>
             </ListItemSecondaryAction>
           </ListItem>
         ))}

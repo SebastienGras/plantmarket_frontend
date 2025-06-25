@@ -6,4 +6,5 @@ export const QUERY_KEYS = {
   ADD_PRODUCT: "addProduct",
   PRODUCT: "product",
   USER: "user",
+  DELETE_PRODUCT: "deleteProduct",
 };
