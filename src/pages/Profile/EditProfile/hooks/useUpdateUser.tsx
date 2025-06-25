@@ -10,17 +10,15 @@ import { QUERY_KEYS } from "@constants/queryKeys";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { api } from "@services/axios";
 
-type useUpdateUserProps<T extends string> = {
+type useUpdateUserProps = {
   userId: string;
-  setSelectedTab: (tab: T) => void;
-  productTab: T;
+  setSelectedTab: () => void;
 };
 
-export const useUpdateUser = <T extends string>({
+export const useUpdateUser = ({
   userId,
   setSelectedTab,
-  productTab,
-}: useUpdateUserProps<T>): UseMutationResult<
+}: useUpdateUserProps): UseMutationResult<
   any,
   Error,
   Partial<USER>,
@@ -43,7 +41,7 @@ export const useUpdateUser = <T extends string>({
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.USER, userId],
       });
-      setSelectedTab(productTab);
+      setSelectedTab();
     },
     onError: (error) => {
       console.error("Error updating user:", error);

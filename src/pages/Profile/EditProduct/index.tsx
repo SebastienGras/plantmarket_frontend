@@ -4,28 +4,20 @@ import { useGetProductById } from "@hooks/useGetProductById";
 
 import ProductForm from "./components/ProductForm";
 
-type EditProductProps<T extends string> = {
+type EditProductProps = {
   productId: string | null;
-  setSelectedTab: (tab: T) => void;
-  productTab: T;
+  setSelectedTab: () => void;
 };
 
-const EditProduct = <T extends string>({
+const EditProduct = ({
   productId,
   setSelectedTab,
-  productTab,
-}: EditProductProps<T>): JSX.Element => {
+}: EditProductProps): JSX.Element => {
   const { data: product, isLoading } = useGetProductById(productId!);
 
   if (isLoading || !product) return <div>Chargement...</div>;
 
-  return (
-    <ProductForm
-      product={product}
-      setSelectedTab={setSelectedTab}
-      productTab={productTab}
-    />
-  );
+  return <ProductForm product={product} setSelectedTab={setSelectedTab} />;
 };
 
 export default EditProduct;

@@ -14,23 +14,20 @@ import { useUpdateProduct } from "../../hooks/useUpdateProduct";
 
 import { EditProductSchema } from "./validator";
 
-type EditProductFormProps<T extends string> = {
+type EditProductFormProps = {
   product: PRODUCT;
-  setSelectedTab: (tab: T) => void;
-  productTab: T;
+  setSelectedTab: () => void;
 };
 
-const EditProductForm = <T extends string>({
+const EditProductForm = ({
   product,
   setSelectedTab,
-  productTab,
-}: EditProductFormProps<T>): JSX.Element => {
+}: EditProductFormProps): JSX.Element => {
   const { data: categories } = useGetCategories();
 
   const { mutate: updateProduct, isPending } = useUpdateProduct({
     productId: product.id,
     setSelectedTab,
-    productTab,
   });
 
   const onSubmit = (values: any): void => {

@@ -10,22 +10,15 @@ import { QUERY_KEYS } from "@constants/queryKeys";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { api } from "@services/axios";
 
-type useUpdateProductProps<T extends string> = {
+type useUpdateProductProps = {
   productId: string | null;
-  setSelectedTab: (tab: T) => void;
-  productTab: T;
+  setSelectedTab: () => void;
 };
 
-export const useUpdateProduct = <T extends string>({
+export const useUpdateProduct = ({
   productId,
   setSelectedTab,
-  productTab,
-}: useUpdateProductProps<T>): UseMutationResult<
-  any,
-  Error,
-  PRODUCT,
-  unknown
-> => {
+}: useUpdateProductProps): UseMutationResult<any, Error, PRODUCT, unknown> => {
   const { showSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
 
@@ -43,7 +36,7 @@ export const useUpdateProduct = <T extends string>({
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.PRODUCTS_SEARCH],
       });
-      setSelectedTab(productTab);
+      setSelectedTab();
     },
     onError: (error) => {
       console.error("Error updating product:", error);

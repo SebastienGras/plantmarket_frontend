@@ -20,17 +20,15 @@ import { useAuth } from "@hooks/useAuth";
 import { useGetProductsByUserId } from "@hooks/useGetProductsByUserId";
 import { formatPrice } from "@utils/format";
 
-type ProductsProps<T extends string> = {
-  editTab: T;
-  setSelectedTab: (tab: T) => void;
+type ProductsProps = {
+  setSelectedTab: () => void;
   setProductId: (id: string) => void;
 };
 
-const Products = <T extends string>({
-  editTab,
+const Products = ({
   setSelectedTab,
   setProductId,
-}: ProductsProps<T>): JSX.Element => {
+}: ProductsProps): JSX.Element => {
   const { user } = useAuth();
   const {
     data: products,
@@ -99,7 +97,7 @@ const Products = <T extends string>({
                 variant="outlined"
                 onClick={() => {
                   setProductId(product.id);
-                  setSelectedTab(editTab);
+                  setSelectedTab();
                 }}
               >
                 Modifier

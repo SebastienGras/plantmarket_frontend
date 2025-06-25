@@ -12,21 +12,18 @@ import { useUpdateUser } from "../../hooks/useUpdateUser";
 
 import { EditUserSchema } from "./validator";
 
-type EditUserFormProps<T extends string> = {
+type EditUserFormProps = {
   user: USER;
-  setSelectedTab: (tab: T) => void;
-  productTab: T;
+  setSelectedTab: () => void;
 };
 
-const EditUserForm = <T extends string>({
+const EditUserForm = ({
   user,
   setSelectedTab,
-  productTab,
-}: EditUserFormProps<T>): JSX.Element => {
+}: EditUserFormProps): JSX.Element => {
   const { mutate: updateUser, isPending } = useUpdateUser({
     userId: user.id,
     setSelectedTab,
-    productTab,
   });
 
   const onSubmit = (values: any): void => {

@@ -12,8 +12,13 @@ import { zodValidator } from "@utils/validator";
 import { useAddProduct } from "./hooks/useAddProduct";
 import { AddProductSchema } from "./validator";
 
-const AddProduct = (): JSX.Element => {
-  const { mutate: addProductMutation, isPending } = useAddProduct();
+type AddProductProps = {
+  setSelectedTab: () => void;
+};
+
+const AddProduct = ({ setSelectedTab }: AddProductProps): JSX.Element => {
+  const { mutate: addProductMutation, isPending } =
+    useAddProduct(setSelectedTab);
 
   const onSubmit = (values: any): void => {
     addProductMutation({
