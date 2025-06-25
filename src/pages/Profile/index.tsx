@@ -1,65 +1,80 @@
-import { Box } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import * as React from "react";
 import { JSX, useState } from "react";
 
-import NavbarLayout from "@components/Layouts/NavbarLayout";
 import EditProductPage from "@pages/Profile/EditProduct";
 
 import AddProduct from "./AddProduct";
 import EditProfile from "./EditProfile";
 import Products from "./Products";
+import TabPanel from "./TabPanel";
 
-type ProfilePageTabs = "products" | "add" | "profile" | "edit";
-const ProfilePage = (): JSX.Element => {
+const a11yProps = (index: number): { id: string; "aria-controls": string } => {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+};
+
+const Profil = (): JSX.Element => {
+  const [tab, setTab] = useState(0);
   const [productId, setProductId] = useState<string | null>(null);
-  const [selectedTab, setSelectedTab] = useState<ProfilePageTabs>("products");
 
-  const TABS: { value: ProfilePageTabs; label: string }[] = [
-    { value: "products", label: "Mes produits" },
-    { value: "add", label: "Ajouter un produit" },
-    { value: "profile", label: "Modifier mon profil" },
-  ];
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const handleChangeTab = (_: React.SyntheticEvent, newTab: number): void => {
+    setTab(newTab);
+  };
 
   return (
     <Box
-      sx={{ display: "flex", height: "100vh", bgcolor: "background.default" }}
+      sx={{
+        flexGrow: 1,
+        bgcolor: "background.paper",
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        height: "100%",
+      }}
     >
-      <NavbarLayout<ProfilePageTabs>
-        selectedTab={selectedTab}
-        setSelectedTab={setSelectedTab}
-        tabs={TABS}
-        title="Mon espace"
-      />
-      <Box
+      <Tabs
+        orientation={isMobile ? "horizontal" : "vertical"}
+        variant="scrollable"
+        value={tab}
+        onChange={handleChangeTab}
+        aria-label="Profile Tabs"
         sx={{
-          flexGrow: 1,
-          p: 4,
-          overflowY: "auto",
+          borderRight: isMobile ? "none" : 1,
+          borderBottom: isMobile ? 1 : "none",
+          borderColor: "divider",
         }}
       >
-        {selectedTab === "products" && (
-          <Products
-            setProductId={setProductId}
-            setSelectedTab={setSelectedTab}
-            editTab={"edit" as ProfilePageTabs}
-          />
-        )}
-        {selectedTab === "add" && <AddProduct />}
-        {selectedTab === "profile" && (
-          <EditProfile
-            setSelectedTab={setSelectedTab}
-            productTab={"products" as ProfilePageTabs}
-          />
-        )}
-        {selectedTab === "edit" && (
-          <EditProductPage
-            setSelectedTab={setSelectedTab}
-            productId={productId}
-            productTab={"products" as ProfilePageTabs}
-          />
-        )}
-      </Box>
+        <Tab label="Mes Produits" {...a11yProps(0)} />
+        <Tab label="Ajouter un produit" {...a11yProps(1)} />
+        <Tab label="Modifier mon profile" {...a11yProps(2)} />
+      </Tabs>
+      <TabPanel value={tab} index={0}>
+        <Products
+          setProductId={setProductId}
+          setSelectedTab={() => setTab(3)}
+        />
+      </TabPanel>
+      <TabPanel value={tab} index={1}>
+        <AddProduct setSelectedTab={() => setTab(0)} />
+      </TabPanel>
+      <TabPanel value={tab} index={2}>
+        <EditProfile setSelectedTab={() => setTab(0)} />
+      </TabPanel>
+      <TabPanel value={tab} index={3}>
+        <EditProductPage
+          setSelectedTab={() => setTab(0)}
+          productId={productId}
+        />
+      </TabPanel>
     </Box>
   );
 };
 
-export default ProfilePage;
+export default Profil;

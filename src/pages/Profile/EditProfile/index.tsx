@@ -5,27 +5,17 @@ import { useGetUserById } from "@hooks/useGetUserById";
 
 import EditUserForm from "./components/EditUserForm";
 
-type EditProfileProps<T extends string> = {
-  setSelectedTab: (tab: T) => void;
-  productTab: T;
+type EditProfileProps = {
+  setSelectedTab: () => void;
 };
 
-const EditProfile = <T extends string>({
-  setSelectedTab,
-  productTab,
-}: EditProfileProps<T>): JSX.Element => {
+const EditProfile = ({ setSelectedTab }: EditProfileProps): JSX.Element => {
   const { user: auth } = useAuth();
   const { data: user, isLoading } = useGetUserById(auth?.id!);
 
   if (isLoading || !user) return <div>Chargement...</div>;
 
-  return (
-    <EditUserForm
-      user={user}
-      setSelectedTab={setSelectedTab}
-      productTab={productTab}
-    />
-  );
+  return <EditUserForm user={user} setSelectedTab={setSelectedTab} />;
 };
 
 export default EditProfile;

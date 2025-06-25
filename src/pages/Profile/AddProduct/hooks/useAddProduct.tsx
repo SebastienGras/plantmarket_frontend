@@ -1,19 +1,19 @@
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { useNavigate } from "react-router-dom";
 
 import { PRODUCT } from "@constants/models";
 import { QUERY_KEYS } from "@constants/queryKeys";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { api } from "@services/axios";
 
-export const useAddProduct = (): UseMutationResult<
-  PRODUCT,
-  Error,
-  any,
-  unknown
-> => {
-  const navigate = useNavigate();
+export const useAddProduct = (
+  setSelectedTab: () => void
+): UseMutationResult<PRODUCT, Error, any, unknown> => {
+  const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
 
   return useMutation({
@@ -27,12 +27,13 @@ export const useAddProduct = (): UseMutationResult<
     },
     onSuccess: () => {
       showSnackbar("Produit ajouté avec succès !", "success");
-      navigate(0);
-      console.log("Product added successfully");
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.PRODUCTS_SEARCH],
+      });
+      setSelectedTab();
     },
-    onError: (error) => {
+    onError: () => {
       showSnackbar("Erreur lors de l'ajout du produit", "error");
-      console.error("Error adding product:", error);
     },
   });
 };
