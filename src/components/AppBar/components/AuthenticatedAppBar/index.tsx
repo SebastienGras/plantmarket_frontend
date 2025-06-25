@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import ButtonComponent from "@components/Button";
 import { AUTHENTICATED_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
+import { useConfirmModal } from "@hooks/useConfirmModal";
 
 const AuthenticatedAppBar = (): JSX.Element => {
+  const confirm = useConfirmModal();
+
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
@@ -27,8 +30,15 @@ const AuthenticatedAppBar = (): JSX.Element => {
       <ButtonComponent
         variant="text"
         color="inherit"
+        onClick={() =>
+          confirm({
+            title: "Se déconnecter",
+            content: "Es-tu sûr de vouloir te déconnecter ?",
+            confirmLabel: "Déconnexion",
+            onConfirm: handleSignoutClick,
+          })
+        }
         text="Déconnexion"
-        onClick={handleSignoutClick}
         fullWidth={false}
       />
     </>
