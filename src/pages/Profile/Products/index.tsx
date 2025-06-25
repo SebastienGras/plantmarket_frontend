@@ -17,8 +17,11 @@ import { JSX } from "react";
 
 import { PageTitle } from "@components/Typography/PageTitle";
 import { useAuth } from "@hooks/useAuth";
+import { useConfirmModal } from "@hooks/useConfirmModal";
 import { useGetProductsByUserId } from "@hooks/useGetProductsByUserId";
 import { formatPrice } from "@utils/format";
+
+import { useDeleteProduct } from "./hooks/useDeleteProduct";
 
 type ProductsProps = {
   setSelectedTab: () => void;
@@ -36,6 +39,9 @@ const Products = ({
     error,
     refetch,
   } = useGetProductsByUserId(user!.id);
+
+  const { mutate: deleteProduct } = useDeleteProduct();
+  const confirm = useConfirmModal();
 
   if (isLoading) return <CircularProgress />;
   if (error)
@@ -93,15 +99,31 @@ const Products = ({
               }
             />
             <ListItemSecondaryAction>
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  setProductId(product.id);
-                  setSelectedTab();
-                }}
-              >
-                Modifier
-              </Button>
+              <Stack spacing={1}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    setProductId(product.id);
+                    setSelectedTab();
+                  }}
+                >
+                  Modifier
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => {
+                    confirm({
+                      title: "Supprimer le produit",
+                      content: "Es-tu sûr de vouloir supprimer le produit ?",
+                      confirmLabel: "Supprimer",
+                      onConfirm: () => deleteProduct(product.id),
+                    });
+                  }}
+                >
+                  Supprimer
+                </Button>
+              </Stack>
             </ListItemSecondaryAction>
           </ListItem>
         ))}
