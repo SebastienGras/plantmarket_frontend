@@ -1,3 +1,4 @@
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   Box,
   Button,
@@ -8,10 +9,11 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { JSX } from "react";
+import { JSX, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { PriceComponent } from "@components/Typography/Price";
+import { useAddItemCart } from "@hooks/useAddItemCart";
 import { useGetUserById } from "@hooks/useGetUserById";
 
 import { useGetProductById } from "../../hooks/useGetProductById";
@@ -26,6 +28,25 @@ const ProductPage = (): JSX.Element => {
     isError: isProductError,
   } = useGetProductById(productId!);
   const { data: user } = useGetUserById(product?.sellerId);
+
+  const [isAdding, setIsAdding] = useState(false);
+  const { mutate: addToCart } = useAddItemCart();
+
+  const handleAddToCart = async (): Promise<void> => {
+    if (!productId) return;
+
+    try {
+      setIsAdding(true);
+      console.log("Ajout au panier", productId);
+      addToCart({ productId, quantity: 1 });
+      alert(`Produit "${product?.title}" ajouté au panier`);
+    } catch (err) {
+      console.error("Erreur ajout au panier", err);
+    } finally {
+      setIsAdding(false);
+    }
+    return;
+  };
 
   if (isProductLoading)
     return (
@@ -106,9 +127,21 @@ const ProductPage = (): JSX.Element => {
             )}
 
             <Button
+              variant="outlined"
+              color="secondary"
+              sx={{ mt: 3 }}
+              fullWidth
+              startIcon={<ShoppingCartIcon />}
+              onClick={handleAddToCart}
+              disabled={isAdding || product.stock === 0}
+            >
+              {isAdding ? "Ajout..." : "Ajouter au panier"}
+            </Button>
+
+            <Button
               variant="contained"
               color="primary"
-              sx={{ mt: 3 }}
+              sx={{ mt: 2 }}
               fullWidth
             >
               Contacter le vendeur {product.sellerId || "N/A"}
