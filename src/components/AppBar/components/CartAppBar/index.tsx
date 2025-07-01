@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 import { AUTHENTICATED_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
-import { useGetItemsCartByUserId } from "@hooks/useGetItemsCartByUserId";
+import { useGetSummaryCartByUserId } from "@hooks/useGetSummaryCartByUserId";
 import { formatPrice } from "@utils/format";
 
 const CartAppBar = (): JSX.Element => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { data: cartInformations, isLoading } = useGetItemsCartByUserId(
+  const { data: cartInformations, isLoading } = useGetSummaryCartByUserId(
     user?.id
   );
 
