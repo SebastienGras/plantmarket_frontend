@@ -9,4 +9,5 @@ export const QUERY_KEYS = {
   DELETE_PRODUCT: "deleteProduct",
   ADD_TO_CART: "add-to-cart",
   CART: "cart",
+  CART_SUMMARY: "cartSummary",
 };

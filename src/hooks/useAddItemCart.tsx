@@ -21,12 +21,9 @@ type CartItemResponse = {
   createdAt: string;
 };
 
-export const useAddItemCart = (): UseMutationResult<
-  CartItemResponse,
-  Error,
-  AddToCartPayload,
-  unknown
-> => {
+export const useAddItemCart = (
+  userId?: string
+): UseMutationResult<CartItemResponse, Error, AddToCartPayload, unknown> => {
   const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
 
@@ -39,7 +36,7 @@ export const useAddItemCart = (): UseMutationResult<
     onSuccess: () => {
       showSnackbar("Produit ajouté au panier !", "success");
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.CART],
+        queryKey: [QUERY_KEYS.CART_SUMMARY, userId],
       });
     },
     onError: () => {

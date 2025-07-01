@@ -9,9 +9,10 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { JSX, useState } from "react";
+import { JSX } from "react";
 import { useParams } from "react-router-dom";
 
+import ButtonComponent from "@components/Button";
 import { PriceComponent } from "@components/Typography/Price";
 import { useAddItemCart } from "@hooks/useAddItemCart";
 import { useGetUserById } from "@hooks/useGetUserById";
@@ -29,21 +30,16 @@ const ProductPage = (): JSX.Element => {
   } = useGetProductById(productId!);
   const { data: user } = useGetUserById(product?.sellerId);
 
-  const [isAdding, setIsAdding] = useState(false);
-  const { mutate: addToCart } = useAddItemCart();
+  const { mutate: addToCart, isPending } = useAddItemCart(user?.id);
 
   const handleAddToCart = async (): Promise<void> => {
     if (!productId) return;
 
     try {
-      setIsAdding(true);
       console.log("Ajout au panier", productId);
       addToCart({ productId, quantity: 1 });
-      alert(`Produit "${product?.title}" ajouté au panier`);
     } catch (err) {
       console.error("Erreur ajout au panier", err);
-    } finally {
-      setIsAdding(false);
     }
     return;
   };
@@ -126,17 +122,15 @@ const ProductPage = (): JSX.Element => {
               </>
             )}
 
-            <Button
+            <ButtonComponent
               variant="outlined"
               color="secondary"
-              sx={{ mt: 3 }}
               fullWidth
               startIcon={<ShoppingCartIcon />}
               onClick={handleAddToCart}
-              disabled={isAdding || product.stock === 0}
-            >
-              {isAdding ? "Ajout..." : "Ajouter au panier"}
-            </Button>
+              disabled={isPending || product.stock === 0}
+              text={isPending ? "Ajout..." : "Ajouter au panier"}
+            />
 
             <Button
               variant="contained"
