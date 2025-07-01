@@ -22,13 +22,10 @@ export const useLoginUser = (): UseMutationResult<
   return useMutation({
     mutationKey: [QUERY_KEYS.AUTH_LOGIN],
     mutationFn: async ({ email, password }: LoginUserParams) => {
-      const response = await api.post<any, AxiosResponse<USER>>(
-        QUERY_KEYS.AUTH_LOGIN,
-        {
-          email,
-          password,
-        }
-      );
+      const response = await api.post<any, AxiosResponse<USER>>(`/auth/login`, {
+        email,
+        password,
+      });
       return response.data;
     },
     onSuccess: (data) => {
