@@ -1,3 +1,4 @@
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import BoutonComponent from "./index";
@@ -53,5 +54,11 @@ export const NotFullWidth: Story = {
   args: {
     variant: "contained",
     fullWidth: false,
+  },
+};
+
+export const startIcon: Story = {
+  args: {
+    startIcon: <ShoppingCartIcon />,
   },
 };
