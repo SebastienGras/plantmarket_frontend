@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { JSX } from "react";
+import { Link } from "react-router-dom";
 
 import ButtonComponent from "@components/Button";
 import { useAuth } from "@hooks/useAuth";
@@ -49,7 +50,15 @@ const CartPage = (): JSX.Element => {
         {cartItems.map((item) => {
           return (
             <Grid size={12} key={item.productId}>
-              <Card sx={{ display: "flex", alignItems: "center" }}>
+              <Card
+                component={Link}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                }}
+                to={`/products/${item.productId}`}
+              >
                 <CardMedia
                   component="img"
                   image="https://img.freepik.com/psd-gratuit/monstera-deliciosa-plante-dans-pot-feuilles-vertes-luxuriantes-decoration-maison-plante-interieur-feuillage-tropical-plante-pot-verte-vibrante-plante-appartement-plante-verdure-photographie-plante_191095-84025.jpg?semt=ais_hybrid&w=740"
