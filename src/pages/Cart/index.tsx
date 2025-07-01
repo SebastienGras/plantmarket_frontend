@@ -8,15 +8,14 @@ import {
   Divider,
   Grid,
   IconButton,
-  MenuItem,
   Paper,
-  Select,
   Typography,
 } from "@mui/material";
 import { JSX, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ButtonComponent from "@components/Button";
+import QuantitySelector from "@components/QuantitySelector";
 import { useAuth } from "@hooks/useAuth";
 import { useGetSummaryCartByUserId } from "@hooks/useGetSummaryCartByUserId";
 import { formatPrice } from "@utils/format";
@@ -28,12 +27,10 @@ const CartPage = (): JSX.Element => {
   const { data: cartItems, isLoading } = useGetItemsCartByUserId(user?.id);
   const { data: cartSummary } = useGetSummaryCartByUserId(user?.id);
 
-  // Pour gérer localement les quantités (optionnel)
   const [quantities, setQuantities] = useState<Record<string, number>>({});
 
   const handleQuantityChange = (productId: string, newQty: number): void => {
     setQuantities((prev) => ({ ...prev, [productId]: newQty }));
-    // ici tu peux aussi appeler une mutation pour MAJ serveur si nécessaire
   };
 
   const handleRemoveItem = (productId: string): void => {
@@ -108,22 +105,14 @@ const CartPage = (): JSX.Element => {
                 </Box>
 
                 <CardContent>
-                  <Select
+                  <QuantitySelector
                     value={quantity}
-                    onChange={(e) =>
-                      handleQuantityChange(
-                        item.productId,
-                        Number(e.target.value)
-                      )
+                    min={1}
+                    max={Number(item.stock)}
+                    onChange={(newQuantity) =>
+                      handleQuantityChange(item.productId, newQuantity)
                     }
-                    size="small"
-                  >
-                    {[...Array(10).keys()].map((n) => (
-                      <MenuItem key={n + 1} value={n + 1}>
-                        {n + 1}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  />
                 </CardContent>
 
                 <CardContent>
