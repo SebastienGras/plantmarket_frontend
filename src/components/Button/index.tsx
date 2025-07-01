@@ -16,6 +16,7 @@ type ButtonComponentProps = {
   size?: "small" | "medium" | "large";
   text?: string;
   type?: "button" | "submit" | "reset";
+  startIcon?: JSX.Element;
   onClick?: () => void;
 };
 
@@ -27,6 +28,7 @@ const ButtonComponent = ({
   text = "Submit",
   type = "button",
   disabled = false,
+  startIcon,
   onClick,
 }: ButtonComponentProps): JSX.Element => {
   return (
@@ -38,6 +40,7 @@ const ButtonComponent = ({
       disabled={disabled}
       fullWidth={fullWidth}
       size={size}
+      startIcon={startIcon}
     >
       {text}
     </Button>

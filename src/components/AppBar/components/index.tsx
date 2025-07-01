@@ -7,6 +7,7 @@ import { PUBLIC_ROUTES } from "@constants/routes";
 import { useAuth } from "@hooks/useAuth";
 
 import AuthenticatedAppBar from "./AuthenticatedAppBar";
+import CartAppBar from "./CartAppBar";
 import UnauthenticatedAppBar from "./UnauthenticatedAppBar";
 
 const AppBarComponent = (): JSX.Element => {
@@ -23,6 +24,7 @@ const AppBarComponent = (): JSX.Element => {
           text="PlantMarket"
           fullWidth={false}
         />
+        <CartAppBar />
         <Box flexGrow={1} display="flex" justifyContent="flex-end">
           {user?.token ? <AuthenticatedAppBar /> : <UnauthenticatedAppBar />}
         </Box>

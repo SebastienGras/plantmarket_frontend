@@ -1,3 +1,4 @@
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   Box,
   Button,
@@ -11,7 +12,9 @@ import {
 import { JSX } from "react";
 import { useParams } from "react-router-dom";
 
+import ButtonComponent from "@components/Button";
 import { PriceComponent } from "@components/Typography/Price";
+import { useAddItemCart } from "@hooks/useAddItemCart";
 import { useGetUserById } from "@hooks/useGetUserById";
 
 import { useGetProductById } from "../../hooks/useGetProductById";
@@ -26,6 +29,14 @@ const ProductPage = (): JSX.Element => {
     isError: isProductError,
   } = useGetProductById(productId!);
   const { data: user } = useGetUserById(product?.sellerId);
+
+  const { mutate: addToCart, isPending } = useAddItemCart(user?.id);
+
+  const handleAddToCart = async (): Promise<void> => {
+    if (!productId) return;
+    addToCart({ productId, quantity: 1 });
+    return;
+  };
 
   if (isProductLoading)
     return (
@@ -105,10 +116,20 @@ const ProductPage = (): JSX.Element => {
               </>
             )}
 
+            <ButtonComponent
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              startIcon={<ShoppingCartIcon />}
+              onClick={handleAddToCart}
+              disabled={isPending || product.stock === 0}
+              text={isPending ? "Ajout..." : "Ajouter au panier"}
+            />
+
             <Button
               variant="contained"
               color="primary"
-              sx={{ mt: 3 }}
+              sx={{ mt: 2 }}
               fullWidth
             >
               Contacter le vendeur {product.sellerId || "N/A"}
