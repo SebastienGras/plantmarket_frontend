@@ -1,5 +1,5 @@
 export const QUERY_KEYS = {
-  AUTH_LOGIN: "/auth/login",
+  AUTH_LOGIN: "authLogin",
   PRODUCTS_SEARCH: "products",
   CATEGORIES: "categories",
   SUBCATEGORIES_BY_CATEGORY_ID: "subcategories",
