@@ -34,13 +34,7 @@ const ProductPage = (): JSX.Element => {
 
   const handleAddToCart = async (): Promise<void> => {
     if (!productId) return;
-
-    try {
-      console.log("Ajout au panier", productId);
-      addToCart({ productId, quantity: 1 });
-    } catch (err) {
-      console.error("Erreur ajout au panier", err);
-    }
+    addToCart({ productId, quantity: 1 });
     return;
   };
 

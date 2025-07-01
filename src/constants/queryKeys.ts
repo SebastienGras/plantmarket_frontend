@@ -7,7 +7,7 @@ export const QUERY_KEYS = {
   PRODUCT: "product",
   USER: "user",
   DELETE_PRODUCT: "deleteProduct",
-  ADD_TO_CART: "add-to-cart",
+  ADD_TO_CART: "addToCart",
   CART: "cart",
   CART_SUMMARY: "cartSummary",
 };
