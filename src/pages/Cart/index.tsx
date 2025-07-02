@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 
 import ButtonComponent from "@components/Button";
 import QuantitySelector from "@components/QuantitySelector";
+import { PageTitle } from "@components/Typography/PageTitle";
 import { useAuth } from "@hooks/useAuth";
 import { useGetSummaryCartByUserId } from "@hooks/useGetSummaryCartByUserId";
 import { formatPrice } from "@utils/format";
@@ -55,9 +56,7 @@ const CartPage = (): JSX.Element => {
 
   return (
     <Box sx={{ p: { xs: 2, md: 4 } }}>
-      <Typography variant="h4" gutterBottom>
-        Mon panier
-      </Typography>
+      <PageTitle text="Mon panier" />
       <Divider sx={{ mb: 3 }} />
 
       <Grid container spacing={4}>
