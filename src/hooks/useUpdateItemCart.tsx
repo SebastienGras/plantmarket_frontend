@@ -38,12 +38,8 @@ export const useUpdateItemCart = (
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.CART],
       });
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.CART_SUMMARY],
-      });
     },
-    onError: (error) => {
-      console.error("Error updating product:", error);
+    onError: () => {
       showSnackbar("Erreur lors de la mise à jour du panier", "error");
     },
   });

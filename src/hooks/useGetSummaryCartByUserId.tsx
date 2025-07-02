@@ -15,7 +15,7 @@ export const useGetSummaryCartByUserId = (
   userId?: string
 ): UseQueryResult<CART_SUMMARY, Error> => {
   return useQuery({
-    queryKey: [QUERY_KEYS.CART_SUMMARY, userId],
+    queryKey: [QUERY_KEYS.CART, userId, QUERY_KEYS.CART_SUMMARY],
     queryFn: async () => {
       const res = await api.get(`/cart/summary/` + userId);
       return res.data;
