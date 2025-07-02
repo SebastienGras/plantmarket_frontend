@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 import ButtonComponent from "@components/Button";
 import { PriceComponent } from "@components/Typography/Price";
 import { useAddItemCart } from "@hooks/useAddItemCart";
+import { useAuth } from "@hooks/useAuth";
 import { useGetUserById } from "@hooks/useGetUserById";
 
 import { useGetProductById } from "../../hooks/useGetProductById";
@@ -22,6 +23,7 @@ import { useGetProductById } from "../../hooks/useGetProductById";
 import SellerProducts from "./components/SellerProducts";
 
 const ProductPage = (): JSX.Element => {
+  const { user: authenticatedUser } = useAuth();
   const { id: productId } = useParams();
   const {
     data: product,
@@ -30,7 +32,9 @@ const ProductPage = (): JSX.Element => {
   } = useGetProductById(productId!);
   const { data: user } = useGetUserById(product?.sellerId);
 
-  const { mutate: addToCart, isPending } = useAddItemCart(user?.id);
+  const { mutate: addToCart, isPending } = useAddItemCart(
+    authenticatedUser?.id
+  );
 
   const handleAddToCart = async (): Promise<void> => {
     if (!productId) return;
