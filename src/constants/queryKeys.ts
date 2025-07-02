@@ -10,4 +10,5 @@ export const QUERY_KEYS = {
   ADD_TO_CART: "addToCart",
   CART: "cart",
   CART_SUMMARY: "cartSummary",
+  UPDATE_CART_ITEM: "updateCartItem",
 };

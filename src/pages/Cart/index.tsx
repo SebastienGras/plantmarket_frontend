@@ -11,14 +11,16 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ButtonComponent from "@components/Button";
 import QuantitySelector from "@components/QuantitySelector";
 import { PageTitle } from "@components/Typography/PageTitle";
 import { useAuth } from "@hooks/useAuth";
+import { useDebounce } from "@hooks/useDebounce";
 import { useGetSummaryCartByUserId } from "@hooks/useGetSummaryCartByUserId";
+import { useUpdateItemCart } from "@hooks/useUpdateItemCart";
 import { formatPrice } from "@utils/format";
 
 import { useGetItemsCartByUserId } from "./hooks/useGetItemsCartByUserId";
@@ -27,8 +29,9 @@ const CartPage = (): JSX.Element => {
   const { user } = useAuth();
   const { data: cartItems, isLoading } = useGetItemsCartByUserId(user?.id);
   const { data: cartSummary } = useGetSummaryCartByUserId(user?.id);
-
   const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const debouncedQuantities = useDebounce(quantities, 500);
+  const { mutate: updateItemCart } = useUpdateItemCart();
 
   const handleQuantityChange = (productId: string, newQty: number): void => {
     setQuantities((prev) => ({ ...prev, [productId]: newQty }));
@@ -37,6 +40,19 @@ const CartPage = (): JSX.Element => {
   const handleRemoveItem = (productId: string): void => {
     console.log("remove", productId);
   };
+
+  useEffect(() => {
+    if (!cartItems) return;
+
+    Object.entries(debouncedQuantities).forEach(([productId, newQty]) => {
+      const originalQty = cartItems.find(
+        (item) => item.productId === productId
+      )?.quantity;
+      if (originalQty !== undefined && originalQty !== newQty) {
+        updateItemCart({ productId, quantity: newQty });
+      }
+    });
+  }, [debouncedQuantities, cartItems, updateItemCart]);
 
   if (isLoading) {
     return (
