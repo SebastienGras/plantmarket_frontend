@@ -6,6 +6,7 @@ import { api } from "@services/axios";
 export type CART_ITEM = {
   productId: string;
   quantity: number;
+  cartId: string;
   title: string;
   description: string;
   price: number;

@@ -33,8 +33,18 @@ const CartItem = ({ item }: CartItemProps): JSX.Element => {
     if (debouncedQuantity === item.quantity) return;
     if (!item.productId) return;
 
-    updateItemCart({ productId: item.productId, quantity: debouncedQuantity });
-  }, [debouncedQuantity, updateItemCart, item.productId, item.quantity]);
+    updateItemCart({
+      cartId: item.cartId,
+      productId: item.productId,
+      quantity: debouncedQuantity,
+    });
+  }, [
+    debouncedQuantity,
+    updateItemCart,
+    item.cartId,
+    item.productId,
+    item.quantity,
+  ]);
 
   return (
     <Card

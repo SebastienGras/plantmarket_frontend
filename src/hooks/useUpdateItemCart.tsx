@@ -9,6 +9,7 @@ import { useSnackbar } from "@hooks/useSnackbar";
 import { api } from "@services/axios";
 
 type UpdateItemPayload = {
+  cartId: string;
   productId: string;
   quantity: number;
 };
@@ -21,6 +22,7 @@ type CartItemResponse = {
 };
 
 export const useUpdateItemCart = (
+  cartId?: string,
   productId?: string,
   quantity?: number
 ): UseMutationResult<CartItemResponse[], Error, UpdateItemPayload, unknown> => {
@@ -28,9 +30,12 @@ export const useUpdateItemCart = (
   const { showSnackbar } = useSnackbar();
 
   return useMutation({
-    mutationKey: [QUERY_KEYS.UPDATE_CART_ITEM, productId, quantity],
+    mutationKey: [QUERY_KEYS.UPDATE_CART_ITEM, cartId, productId, quantity],
     mutationFn: async (payload: UpdateItemPayload) => {
-      const response = await api.patch(`/cart/${payload.productId}`, payload);
+      const response = await api.patch(
+        `/cart/${payload.cartId}/product/${payload.productId}`,
+        payload
+      );
       return response.data;
     },
     onSuccess: () => {
