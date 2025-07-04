@@ -23,7 +23,10 @@ type CartItemProps = {
 const CartItem = ({ item }: CartItemProps): JSX.Element => {
   const [quantity, setQuantity] = useState<number>(item.quantity);
   const debouncedQuantity = useDebounce(quantity, 500);
-  const { mutate: updateItemCart } = useUpdateItemCart();
+  const { mutate: updateItemCart } = useUpdateItemCart(
+    item.cartId,
+    item.productId
+  );
 
   const handleRemoveItem = (productId: string): void => {
     console.log("remove", productId);
@@ -34,8 +37,6 @@ const CartItem = ({ item }: CartItemProps): JSX.Element => {
     if (!item.productId) return;
 
     updateItemCart({
-      cartId: item.cartId,
-      productId: item.productId,
       quantity: debouncedQuantity,
     });
   }, [
