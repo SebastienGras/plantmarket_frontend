@@ -110,7 +110,7 @@ const CartItem = ({ item }: CartItemProps): JSX.Element => {
             title: "Supprimer le produit",
             content: "Es-tu sûr de vouloir supprimer le produit ?",
             confirmLabel: "Supprimer",
-            onConfirm: () => deleteItemCart(""),
+            onConfirm: () => deleteItemCart({}),
           });
         }}
       >
