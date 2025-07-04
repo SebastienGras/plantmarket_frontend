@@ -11,8 +11,10 @@ import { JSX, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import QuantitySelector from "@components/QuantitySelector";
+import { useConfirmModal } from "@hooks/useConfirmModal";
 import { useDebounce } from "@hooks/useDebounce";
 import { useUpdateItemCart } from "@hooks/useUpdateItemCart";
+import { useDeleteItemCart } from "@pages/Cart/hooks/useDeleteItemCart";
 import { CART_ITEM } from "@pages/Cart/hooks/useGetItemsCartByUserId";
 import { formatPrice } from "@utils/format";
 
@@ -27,10 +29,11 @@ const CartItem = ({ item }: CartItemProps): JSX.Element => {
     item.cartId,
     item.productId
   );
-
-  const handleRemoveItem = (productId: string): void => {
-    console.log("remove", productId);
-  };
+  const { mutate: deleteItemCart } = useDeleteItemCart(
+    item.cartId,
+    item.productId
+  );
+  const confirm = useConfirmModal();
 
   useEffect(() => {
     if (debouncedQuantity === item.quantity) return;
@@ -101,7 +104,16 @@ const CartItem = ({ item }: CartItemProps): JSX.Element => {
         </Typography>
       </CardContent>
 
-      <IconButton onClick={() => handleRemoveItem(item.productId)}>
+      <IconButton
+        onClick={() => {
+          confirm({
+            title: "Supprimer le produit",
+            content: "Es-tu sûr de vouloir supprimer le produit ?",
+            confirmLabel: "Supprimer",
+            onConfirm: () => deleteItemCart(""),
+          });
+        }}
+      >
         <DeleteIcon color="error" />
       </IconButton>
     </Card>
