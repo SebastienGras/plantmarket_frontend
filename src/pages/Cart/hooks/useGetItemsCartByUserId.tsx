@@ -3,9 +3,10 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@constants/queryKeys";
 import { api } from "@services/axios";
 
-type CART_ITEM = {
+export type CART_ITEM = {
   productId: string;
   quantity: number;
+  cartId: string;
   title: string;
   description: string;
   price: number;

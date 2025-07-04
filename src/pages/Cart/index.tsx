@@ -1,42 +1,26 @@
-import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
-  Card,
-  CardContent,
-  CardMedia,
   CircularProgress,
   Divider,
   Grid,
-  IconButton,
   Paper,
   Typography,
 } from "@mui/material";
-import { JSX, useState } from "react";
-import { Link } from "react-router-dom";
+import { JSX } from "react";
 
 import ButtonComponent from "@components/Button";
-import QuantitySelector from "@components/QuantitySelector";
 import { PageTitle } from "@components/Typography/PageTitle";
 import { useAuth } from "@hooks/useAuth";
 import { useGetSummaryCartByUserId } from "@hooks/useGetSummaryCartByUserId";
 import { formatPrice } from "@utils/format";
 
+import CartItem from "./components/CartItem";
 import { useGetItemsCartByUserId } from "./hooks/useGetItemsCartByUserId";
 
 const CartPage = (): JSX.Element => {
   const { user } = useAuth();
   const { data: cartItems, isLoading } = useGetItemsCartByUserId(user?.id);
   const { data: cartSummary } = useGetSummaryCartByUserId(user?.id);
-
-  const [quantities, setQuantities] = useState<Record<string, number>>({});
-
-  const handleQuantityChange = (productId: string, newQty: number): void => {
-    setQuantities((prev) => ({ ...prev, [productId]: newQty }));
-  };
-
-  const handleRemoveItem = (productId: string): void => {
-    console.log("remove", productId);
-  };
 
   if (isLoading) {
     return (
@@ -61,71 +45,9 @@ const CartPage = (): JSX.Element => {
 
       <Grid container spacing={4}>
         <Grid size={8}>
-          {cartItems.map((item) => {
-            const quantity = quantities[item.productId] ?? item.quantity;
-
-            return (
-              <Card
-                key={item.productId}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  mb: 2,
-                  p: 1,
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image="https://img.freepik.com/psd-gratuit/monstera-deliciosa-plante-dans-pot-feuilles-vertes-luxuriantes-decoration-maison-plante-interieur-feuillage-tropical-plante-pot-verte-vibrante-plante-appartement-plante-verdure-photographie-plante_191095-84025.jpg?semt=ais_hybrid&w=740"
-                  alt={item.title}
-                  sx={{
-                    width: 100,
-                    height: 100,
-                    objectFit: "cover",
-                    borderRadius: 1,
-                  }}
-                />
-
-                <Box sx={{ flex: 1, ml: 2 }}>
-                  <Typography
-                    variant="h6"
-                    color="text.primary"
-                    component={Link}
-                    to={`/products/${item.productId}`}
-                    sx={{
-                      textDecoration: "none",
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography variant="body2">
-                    Prix unitaire : {formatPrice(item.price)}
-                  </Typography>
-                </Box>
-
-                <CardContent>
-                  <QuantitySelector
-                    value={quantity}
-                    min={1}
-                    max={Number(item.stock)}
-                    onChange={(newQuantity) =>
-                      handleQuantityChange(item.productId, newQuantity)
-                    }
-                  />
-                </CardContent>
-
-                <CardContent>
-                  <Typography fontWeight="bold">
-                    {formatPrice(item.price * quantity)}
-                  </Typography>
-                </CardContent>
-
-                <IconButton onClick={() => handleRemoveItem(item.productId)}>
-                  <DeleteIcon color="error" />
-                </IconButton>
-              </Card>
-            );
-          })}
+          {cartItems.map((item) => (
+            <CartItem key={item.productId} item={item} />
+          ))}
         </Grid>
 
         <Grid size={4}>
