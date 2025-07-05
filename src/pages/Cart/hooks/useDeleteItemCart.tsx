@@ -16,8 +16,8 @@ type CartItemResponse = {
 };
 
 export const useDeleteItemCart = (
-  cartId?: string,
-  productId?: string
+  cartId: string,
+  productId: string
 ): UseMutationResult<CartItemResponse, Error> => {
   const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
