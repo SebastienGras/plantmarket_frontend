@@ -1,7 +1,8 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { JSX, useState } from "react";
 
+import Empty from "@components/Empty";
 import { PageTitle } from "@components/Typography/PageTitle";
 import { useDebounce } from "@hooks/useDebounce";
 
@@ -54,14 +55,15 @@ const Home = (): JSX.Element => {
       </Grid>
 
       {isProductsLoading && <ProductCardSkeleton />}
-      {productsError && (
-        <Typography color="error">{HOME_TEXTS.LOADING_ERROR}</Typography>
-      )}
 
       <Grid container spacing={3}>
-        {products?.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
+        {products?.length && !productsError ? (
+          products.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))
+        ) : (
+          <Empty />
+        )}
       </Grid>
     </Box>
   );
