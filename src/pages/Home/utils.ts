@@ -4,6 +4,7 @@ export const buildProductSearchUrl = ({
   search,
   categoryId,
   subcategoryId,
+  notSellerId,
 }: HOME_FILTERS): string => {
   const params = new URLSearchParams();
 
@@ -19,6 +20,10 @@ export const buildProductSearchUrl = ({
 
   if (subcategoryId) {
     params.set("subcategoryId", subcategoryId);
+  }
+
+  if (notSellerId) {
+    params.set("notSellerId", notSellerId);
   }
 
   return `/products?${params.toString()}`;

@@ -12,6 +12,7 @@ import { JSX, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { PageTitle } from "@components/Typography/PageTitle";
+import { useAuth } from "@hooks/useAuth";
 import { useDebounce } from "@hooks/useDebounce";
 import { formatPrice } from "@utils/format";
 
@@ -22,10 +23,12 @@ import { HOME_FILTERS, HOME_TEXTS } from "./constants";
 import { useSearchProducts } from "./hooks/useSearchProducts";
 
 const Home = (): JSX.Element => {
+  const { user } = useAuth();
   const [query, setQuery] = useState<HOME_FILTERS>({
     search: "",
     categoryId: "",
     subcategoryId: "",
+    notSellerId: user?.id || "",
   });
   const debouncedSearch = useDebounce(query, 500);
 

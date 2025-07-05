@@ -12,6 +12,7 @@ export const useSearchProducts = ({
   search,
   categoryId,
   subcategoryId,
+  notSellerId,
 }: HOME_FILTERS): UseQueryResult<PRODUCT_WITH_CATEGORY[], Error> =>
   useQuery({
     queryKey: [
@@ -19,7 +20,12 @@ export const useSearchProducts = ({
       { search, categoryId, subcategoryId },
     ],
     queryFn: async () => {
-      const url = buildProductSearchUrl({ search, categoryId, subcategoryId });
+      const url = buildProductSearchUrl({
+        search,
+        categoryId,
+        subcategoryId,
+        notSellerId,
+      });
 
       const response = await api.get<PRODUCT_WITH_CATEGORY[]>(url);
       return response.data;

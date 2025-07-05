@@ -8,4 +8,5 @@ export type HOME_FILTERS = {
   search?: string | undefined;
   categoryId?: string | undefined;
   subcategoryId?: string | undefined;
+  notSellerId?: string | undefined;
 };
