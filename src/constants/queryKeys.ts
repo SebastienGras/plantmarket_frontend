@@ -11,4 +11,5 @@ export const QUERY_KEYS = {
   CART: "cart",
   CART_SUMMARY: "summary",
   UPDATE_CART_ITEM: "updateCartItem",
+  DELETE_CART_ITEM: "deleteCartItem",
 };
