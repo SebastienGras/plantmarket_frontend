@@ -4,6 +4,7 @@ import { JSX, useState } from "react";
 
 import Empty from "@components/Empty";
 import { PageTitle } from "@components/Typography/PageTitle";
+import { useAuth } from "@hooks/useAuth";
 import { useDebounce } from "@hooks/useDebounce";
 
 import CategorySelect from "./components/CategorySelect";
@@ -14,10 +15,12 @@ import { HOME_FILTERS, HOME_TEXTS } from "./constants";
 import { useSearchProducts } from "./hooks/useSearchProducts";
 
 const Home = (): JSX.Element => {
+  const { user } = useAuth();
   const [query, setQuery] = useState<HOME_FILTERS>({
     search: "",
     categoryId: "",
     subcategoryId: "",
+    notSellerId: user?.id || "",
   });
   const debouncedSearch = useDebounce(query, 500);
 
