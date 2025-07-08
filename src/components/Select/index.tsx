@@ -1,11 +1,11 @@
 import {
   Box,
-  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Skeleton,
 } from "@mui/material";
 import { JSX } from "react";
 
@@ -37,7 +37,7 @@ const SelectComponent = ({
   return (
     <Box sx={{ minWidth: 200 }}>
       {isLoading ? (
-        <CircularProgress />
+        <Skeleton variant="rounded" width="100%" height={56} />
       ) : (
         <FormControl fullWidth={fullWidth} variant={variant}>
           <InputLabel id={`${label}-label`}>{label}</InputLabel>

@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Chip,
-  CircularProgress,
   List,
   ListItem,
   ListItemAvatar,
@@ -22,6 +21,7 @@ import { useGetProductsByUserId } from "@hooks/useGetProductsByUserId";
 import { formatPrice } from "@utils/format";
 
 import { useDeleteProduct } from "./hooks/useDeleteProduct";
+import ProductsSkeleton from "./Products.squeleton";
 
 type ProductsProps = {
   setSelectedTab: () => void;
@@ -33,17 +33,15 @@ const Products = ({
   setProductId,
 }: ProductsProps): JSX.Element => {
   const { user } = useAuth();
-  const {
-    data: products,
-    isLoading,
-    error,
-    refetch,
-  } = useGetProductsByUserId(user!.id);
+  const { data: products, isLoading, error } = useGetProductsByUserId(user!.id);
 
   const { mutate: deleteProduct } = useDeleteProduct();
   const confirm = useConfirmModal();
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading) {
+    return <ProductsSkeleton />;
+  }
+
   if (error)
     return (
       <Alert severity="error">Erreur lors du chargement des produits</Alert>
@@ -56,9 +54,6 @@ const Products = ({
     <Box>
       <PageTitle text="Mes produits" />
 
-      <Button variant="outlined" onClick={() => refetch()} sx={{ mb: 2 }}>
-        Rafraîchir
-      </Button>
       <List>
         {products.map((product) => (
           <ListItem key={product.id} divider alignItems="flex-start">
